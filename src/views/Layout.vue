@@ -32,6 +32,7 @@ import Content from "@/views/Utils/Content.vue";
 
 .content {
   //min-height: 650px;
+  top: 8vh;
   height: 90vh;
   width: 100vw;
   display: flex;
@@ -42,7 +43,7 @@ import Content from "@/views/Utils/Content.vue";
   width: 15vw;
   left: 0;
   top: 8vh;
-  //height: 92vh;
+  height: 92vh;
   //min-height: 650px;
   background: #545c64;
   overflow: auto;
