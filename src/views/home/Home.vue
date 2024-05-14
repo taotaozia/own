@@ -1,6 +1,6 @@
 <template>
   <div class="calendar">
-    <calendar :project="arr"/>
+    <calendar :project="arr" />
   </div>
   <div class="poetry">
     <div class="content">
@@ -52,15 +52,9 @@ const EN = ref();
 const notice = ref();
 let noticeVisible = ref(false);
 const noticeData = reactive([]);
+const arr = ref([]);
 
 
-const arr = ref([
-  { data: "2024-05-10", content: "项目1" },
-  { data: "2024-05-10", content: "项目2" },
-  { data: "2024-05-10", content: "项目3" },
-  { data: "2024-05-11", content: "项目1" },
-  { data: "2024-05-12", content: "项目1" }
-]);
 onMounted(() => {
   axios({ url: "https://api.kekc.cn/api/yien" }).then(res => {
     if (res) {
@@ -94,12 +88,12 @@ const openNotice = (row) => {
 
 .poetry {
   margin-top: -89vh;
-  margin-left: 41vw;
+  margin-left: 40vw;
   width: 43vw;
   height: 45vh;
   background: url("@/assets/noticeBack.jpg");
   background-size: 100% 100%;
-  opacity: 0.7;
+  opacity: 0.65;
 
   .content {
     padding: 15vh 5vw;
@@ -109,7 +103,7 @@ const openNotice = (row) => {
 
 .notice {
   margin-top: 1vh;
-  margin-left: 41vw;
+  margin-left: 40vw;
   width: 43vw;
   height: 43vh;
 }

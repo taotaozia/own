@@ -4,7 +4,7 @@
       <div style="width: 100%;height: 100%" @click="handleClick(data.day)">
         {{ data.day.split("-").slice(2).join("-") }}
         <div style="width:100%;" v-for="item in props.project" :key="data">
-          <el-tag type="success" v-if="item.data === data.day" size="small">
+          <el-tag :type="item.type" v-if="item.data === data.day" size="small">
             {{ item.content }}
           </el-tag>
         </div>

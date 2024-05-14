@@ -4,8 +4,21 @@
       <img src="../../assets/LGIMLog.png" height="45" width="350" />
     </div>
     <div class="right">
-      <div class="time">{{ time }}</div>
-      <div class="line">|</div>
+      <div class="message">
+        <el-tooltip effect="light" content="个人消息">
+          <el-button type="warning" style="margin-right: 10px" circle @click="table = true">
+            <el-icon>
+              <ChatLineRound />
+            </el-icon>
+          </el-button>
+        </el-tooltip>
+        <el-drawer
+          v-model="table"
+          :with-header="false"
+          size="40%" style="margin-top: 8vh;height: 92vh">
+          <UserNotice />
+        </el-drawer>
+      </div>
       <div class="user">
         <el-dropdown split-button type="warning">
           <span class="name">{{ adminName }}</span>
@@ -28,12 +41,14 @@ import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import Cookies from "js-cookie";
 import { useStore } from "vuex";
+import UserNotice from "@/views/Utils/UserNotice.vue";
 
 // 变量
 const store = useStore();
-let time = ref(null);
 const router = useRouter();
 let adminName = ref(null);
+const table = ref(false);
+
 // 函数
 onMounted(() => {
   adminName.value = store.state.user.admin.name;
@@ -62,16 +77,6 @@ const logout = () => {
   .right {
     padding-right: 20px;
     display: flex;
-
-    .time {
-      flex: 1;
-      font-size: 16px;
-    }
-
-    .line {
-      margin-left: 10px;
-      margin-right: 10px;
-    }
 
     .user {
       padding-top: 10px;

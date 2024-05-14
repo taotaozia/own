@@ -5,10 +5,7 @@
       <div class="maskContainer"
            v-for="(item,index) in imgdata" :key="index">
         <div class="img">
-          <el-image
-            :src="readImg(item)"
-            class="originalImg"
-          ></el-image>
+          <el-image class="originalImg" :src="readImg(item)" />
         </div>
       </div>
     </div>
@@ -112,6 +109,7 @@ onMounted(() => {
       sportData = res.data.dataList2;
       safetyData = res.data.dataList3;
       batteryData = res.data.dataList4;
+      activeName.value = "first";
     }
   });
 });
@@ -169,6 +167,5 @@ const objectSpanMethod = ({ rowIndex, columnIndex }) => {
   margin-left: 5vw;
   margin-bottom: 100px;
 }
-
 
 </style>
