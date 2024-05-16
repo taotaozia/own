@@ -1,6 +1,6 @@
 <template>
   <div class="calendar">
-    <calendar :project="arr" />
+    <Calendar :project="arr" />
   </div>
   <div class="poetry">
     <div class="content">
@@ -52,7 +52,12 @@ const EN = ref();
 const notice = ref();
 let noticeVisible = ref(false);
 const noticeData = reactive([]);
-const arr = ref([]);
+const arr = ref([
+  { type: "success", dayData: "2024-05-01", workType: "出勤", logs: "" },
+  { type: "warning", dayData: "2024-05-02", workType: "休息", logs: "" },
+  { type: "danger", dayData: "2024-05-03", workType: "请假", logs: "" },
+  { type: "info", dayData: "2024-05-04", workType: "放假", logs: "" }
+]);
 
 
 onMounted(() => {

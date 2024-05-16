@@ -10,9 +10,9 @@
         <el-table-column prop="adminID" label="工号" />
         <el-table-column prop="name" label="姓名" />
         <el-table-column prop="identity" label="身份" />
-        <el-table-column prop="faculty" label="研究院" />
-        <el-table-column prop="department" label="部门" />
-        <el-table-column prop="post" label="岗位" />
+        <el-table-column prop="faculty" label="一级部门" />
+        <el-table-column prop="department" label="二级部门" />
+        <el-table-column prop="post" label="岗位身份" />
         <el-table-column prop="updatetime" label="更新时间" width="200" />
         <el-table-column width="150">
           <template #header>

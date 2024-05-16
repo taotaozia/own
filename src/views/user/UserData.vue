@@ -14,13 +14,13 @@
         <el-form-item label="身份">
           <el-input v-model="admin.identity" disabled />
         </el-form-item>
-        <el-form-item label="研究院">
+        <el-form-item label="一级部门">
           <el-input v-model="admin.faculty" disabled />
         </el-form-item>
-        <el-form-item label="部门">
+        <el-form-item label="二级部门">
           <el-input v-model="admin.department" disabled />
         </el-form-item>
-        <el-form-item label="岗位">
+        <el-form-item label="岗位身份">
           <el-input v-model="admin.post" disabled />
         </el-form-item>
         <el-form-item class="button">

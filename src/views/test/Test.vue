@@ -1,40 +1,75 @@
 <template>
   <el-card class="box-card">
     <template #header>
-      <div><span>测试功能</span></div>
+      <div><span>富文本框架</span></div>
     </template>
-    <div class="main">
-      <div class="test1">1</div>
-      <div class="test2">2</div>
-      <div class="test3">3</div>
-      <div class="test4">4</div>
-
+    <div class="wangEditor" style="width: 70%">
+      <Toolbar
+        style="border-bottom: 1px solid #ccc"
+        :editor="editorRef"
+        :defaultConfig="toolbarConfig"
+        :mode="mode"
+      />
+      <Editor
+        style="height: 300px; overflow-y: hidden;"
+        v-model="valueHtml"
+        :defaultConfig="editorConfig"
+        :mode="mode"
+        @onCreated="handleCreated"
+      />
     </div>
 
   </el-card>
 </template>
-<script setup>
 
+<script>
+import "@wangeditor/editor/dist/css/style.css"; // 引入 css
+
+import { onBeforeUnmount, ref, shallowRef, onMounted } from "vue";
+import { Editor, Toolbar } from "@wangeditor/editor-for-vue";
+
+export default {
+  components: { Editor, Toolbar },
+  setup() {
+    // 编辑器实例，必须用 shallowRef
+    const editorRef = shallowRef();
+
+    // 内容 HTML
+    const valueHtml = ref("<p>hello</p>");
+
+    // 模拟 ajax 异步获取内容
+    onMounted(() => {
+      setTimeout(() => {
+        valueHtml.value = "<p>模拟 Ajax 异步设置内容</p>";
+      }, 1500);
+    });
+
+    const toolbarConfig = {};
+    const editorConfig = { placeholder: "请输入内容..." };
+
+    // 组件销毁时，也及时销毁编辑器
+    onBeforeUnmount(() => {
+      const editor = editorRef.value;
+      if (editor == null) return;
+      editor.destroy();
+    });
+
+    const handleCreated = (editor) => {
+      editorRef.value = editor; // 记录 editor 实例，重要！
+    };
+
+    return {
+      editorRef,
+      valueHtml,
+      mode: "default", // 或 'simple'
+      toolbarConfig,
+      editorConfig,
+      handleCreated
+    };
+  }
+};
 
 </script>
 <style>
-.test1 {
-  background: #79c5fc;
-  width: 40vw;
-  height: 50vh;
-}
-.test3{
-  background: greenyellow;
-  margin-top: -54vh;
-  margin-left: 41vw;
-  width: 40vw;
-  height: 25vh;
-}
-.test4{
-  background: antiquewhite;
-  margin-top: 1vh;
-  margin-left: 41vw;
-  width: 40vw;
-  height: 25vh;
-}
+
 </style>

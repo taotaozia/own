@@ -21,6 +21,9 @@
       <el-form-item label="研究院" prop="faculty">
         <el-select v-model="admin.faculty">
           <el-option label="研究总院" value="研究总院" />
+          <el-option label="质量保证部" value="质量保证部" />
+          <el-option label="采购部" value="采购部" />
+          <el-option label="产品制造部" value="产品制造部" />
           <el-option label="移动机器人事业部" value="移动机器人事业部" />
           <el-option label="智能仓储事业部" value="智能仓储事业部" />
           <el-option label="关节机器人事业部" value="关节机器人事业部" />
