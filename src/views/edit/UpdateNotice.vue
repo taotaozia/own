@@ -4,12 +4,13 @@
       <div><span style="font-size: 20px">更新系统消息</span></div>
     </template>
     <div class="table">
-      <el-form :model="notice" label-width="auto" style="max-width: 600px">
+      <el-form :model="notice" label-width="auto" style="max-width: 1000px">
         <el-form-item label="系统消息名称" prop="title">
           <el-input v-model="notice.title" />
         </el-form-item>
         <el-form-item label="更新内容" prop="noticeText">
           <el-input v-model="notice.noticeText" type="textarea" :rows="10" />
+<!--          <LogEdit :valueHtml="notice.noticeText" />-->
         </el-form-item>
         <el-form-item class="button">
           <el-button type="primary" @click="onSubmit">确认</el-button>
@@ -25,6 +26,7 @@
 import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { getNotice, putUpdateNotice } from "@/api/http";
+import LogEdit from "@/views/Utils/LogEdit.vue";
 
 const jieshou = useRoute();
 const tiaozhuan = useRouter();
@@ -41,6 +43,10 @@ onMounted(() => {
   } else {
     tiaozhuan.push("/edit/notice");
   }
+  console.log(notice);
+  console.log(notice.value);
+  console.log(notice.noticeText);
+  console.log(notice.value.noticeText);
 });
 const onSubmit = () => {
   putUpdateNotice(JSON.stringify(notice.value.valueOf())).then((res) => {

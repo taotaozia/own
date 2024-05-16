@@ -30,8 +30,8 @@
       <el-dialog v-model="noticeVisible" center>
         <p v-html="notice"></p>
         <template #footer>
-          <div class="dialog-footer">
-            <el-button @click="noticeVisible = false">已阅</el-button>
+          <div class="dialog-footer" style="margin-top: 30px">
+            <el-button type="primary" @click="noticeVisible = false">已阅</el-button>
           </div>
         </template>
       </el-dialog>

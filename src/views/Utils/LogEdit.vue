@@ -30,6 +30,9 @@ const props = defineProps({ valueHtml: {} });
 const toolbarConfig = {};
 const editorConfig = { placeholder: "请输入内容..." };
 
+onMounted(() => {
+  console.log(props.valueHtml);
+});
 // 组件销毁时，也及时销毁编辑器
 onBeforeUnmount(() => {
   const editor = editorRef.value;

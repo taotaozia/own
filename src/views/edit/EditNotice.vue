@@ -6,8 +6,8 @@
     <div class="table">
       <el-table :data="TableData.value" style="width: 100%;height: 500px">
         <el-table-column type="index" label="序号" width="60" />
-        <el-table-column prop="userid" label="用户" />
-        <el-table-column prop="finish" label="是否完成" />
+        <el-table-column prop="userid" label="用户" width="100" />
+        <el-table-column prop="finish" label="是否完成" width="60" />
         <el-table-column prop="title" label="系统消息名称" width="200" />
         <el-table-column prop="noticeText" label="系统消息内容" />
         <el-table-column prop="updatetime" label="发布时间" width="200" />

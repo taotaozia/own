@@ -4,12 +4,14 @@
       <div><span style="font-size: 20px">添加系统日志</span></div>
     </template>
     <div class="table">
-      <el-form :model="notice" label-width="auto" style="max-width: 600px">
+      <el-form :model="notice" label-width="auto" style="max-width: 1000px">
         <el-form-item label="系统消息名称" prop="title">
           <el-input v-model="notice.title" />
         </el-form-item>
         <el-form-item label="更新内容" prop="noticeText">
           <el-input v-model="notice.noticeText" type="textarea" :rows="10" />
+          <LogEdit :valueHtml="notice.noticeText"/>
+
         </el-form-item>
         <el-form-item class="button">
           <el-button type="primary" @click="onSubmit">确认</el-button>
@@ -26,6 +28,7 @@ import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import dayjs from "dayjs";
 import { postAddNotice } from "@/api/http";
+import LogEdit from "@/views/Utils/LogEdit.vue";
 
 const jieshou = useRoute();
 const tiaozhuan = useRouter();

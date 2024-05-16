@@ -39,27 +39,27 @@ export const deleteAdmin = (id) => {
 // ============ 权限管理 ===============
 // 获取所有需要限制的路由信息
 export const getRouterList = () => {
-  return request.get("/admin/getrouterlist");
+  return request.get("/system/getrouterlist");
 };
 // 根据用户信息获取应有的权限路由
 export const getRouters = (adminID) => {
-  return request.get("/admin/getrouters?adminID=" + adminID);
+  return request.get("/system/getrouters?adminID=" + adminID);
 };
 // 编辑页面中获取某个的权限路由信息
 export const getRouter = (id) => {
-  return request.get("/admin/getrouter?id=" + id);
+  return request.get("/system/getrouter?id=" + id);
 };
 // 编辑页面 -- 更新路由信息
 export const putUpdateRouter = (navrouter) => {
-  return request.put("/admin/updaterouter", navrouter);
+  return request.put("/system/updaterouter", navrouter);
 };
 // 编辑页面 -- 更新路由信息
 export const postAddRouter = (navrouter) => {
-  return request.post("/admin/addrouter", navrouter);
+  return request.post("/system/addrouter", navrouter);
 };
 // 编辑页面 -- 更新路由信息
 export const deleteRouter = (id) => {
-  return request.delete("/admin/getrouter?id=" + id);
+  return request.delete("/system/deleterouter?id=" + id);
 };
 
 
