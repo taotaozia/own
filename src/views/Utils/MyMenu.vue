@@ -23,7 +23,7 @@
       </template>
       <el-menu-item-group>
         <el-menu-item index="/product/agvcategory">移动机器人</el-menu-item>
-        <el-menu-item index="/product/storecategory">智能仓储</el-menu-item>
+        <el-menu-item index="/product/storagecategory">智能仓储</el-menu-item>
         <el-menu-item index="/product/shutcategory">关节机器人</el-menu-item>
       </el-menu-item-group>
     </el-sub-menu>

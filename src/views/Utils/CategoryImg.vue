@@ -14,28 +14,26 @@
       <div class="img">
         <el-image :src="readImg(item.picture)" alt="" class="originalImg" />
       </div>
-<!--      <el-tooltip effect="light">-->
-<!--        <template #content>-->
-<!--          <el-input-->
-<!--            v-model="item.categoryDescription"-->
-<!--            type="textarea"-->
-<!--            :rows="5"-->
-<!--            disabled-->
-<!--            style="width: 275px"-->
-<!--          />-->
-<!--        </template>-->
+      <!--      <el-tooltip effect="light">-->
+      <!--        <template #content>-->
+      <!--          <el-input-->
+      <!--            v-model="item.categoryDescription"-->
+      <!--            type="textarea"-->
+      <!--            :rows="5"-->
+      <!--            disabled-->
+      <!--            style="width: 275px"-->
+      <!--          />-->
+      <!--        </template>-->
 
-<!--      </el-tooltip>-->
+      <!--      </el-tooltip>-->
     </div>
   </div>
 </template>
 
 <script setup>
 import { useRouter } from "vue-router";
-import { getLoadPng } from "@/api/http";
-import { ref } from "vue";
 
-const props = defineProps({ data: {} });
+const props = defineProps({ data: {}, TZPath: {} });
 const tiaozhuan = useRouter();
 //方法
 const addActive = ($event) => {
@@ -49,14 +47,11 @@ const readImg = (imgName) => {
   return "http://192.168.3.237:6688/img/static/" + imgName;
 };
 const getlist = (CUID) => {
-  tiaozhuan.push({ path: "/product/agvlist", query: { CUID: CUID } });
+  tiaozhuan.push({ path: props.TZPath, query: { CUID: CUID } });
 };
 </script>
 
 <style lang="scss" scoped>
-.prod {
-  text-align: center;
-}
 
 .maskContainer {
   display: inline-block;

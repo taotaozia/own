@@ -88,12 +88,12 @@ const login = async () => {
           getRouters(res.data.uuid).then(ret => {
             if (res.code === "200") {
               store.commit("setRouters", ret.data);
+              tiaozhuan.push("/home");
+              loginuser.account = "";
+              loginuser.password = "";
+              ElMessage.success("登录成功");
             }
           });
-          tiaozhuan.push("/home");
-          loginuser.account = "";
-          loginuser.password = "";
-          ElMessage.success("登录成功");
         } else if (res.code === "403") {
           ElMessage.error("账号或密码错误");
         } else {

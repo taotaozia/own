@@ -5,7 +5,7 @@
     </div>
     <div class="prod">
       <div>
-        <CategoryImg :data="updata"></CategoryImg>
+        <CategoryImg :data="updata" TZPath="/product/agvlist"></CategoryImg>
       </div>
       <div>
         <CategoryImg :data="downdata"></CategoryImg>

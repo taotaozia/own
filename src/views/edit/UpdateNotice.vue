@@ -26,7 +26,6 @@
 import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { getNotice, putUpdateNotice } from "@/api/http";
-import LogEdit from "@/views/Utils/LogEdit.vue";
 
 const jieshou = useRoute();
 const tiaozhuan = useRouter();

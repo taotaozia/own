@@ -33,12 +33,10 @@
 
 <script setup>
 import { markRaw, onMounted, reactive } from "vue";
-import request from "@/api/request";
 import { ElMessage, ElMessageBox, ElTable } from "element-plus";
 import { Delete } from "@element-plus/icons-vue";
 import { useRouter } from "vue-router";
-import Cookies from "js-cookie";
-import { deleteAdmin, deleteNotice, getAdmins, getNotices } from "@/api/http";
+import { deleteNotice, getNotices } from "@/api/http";
 
 const tiaozhuan = useRouter();
 const TableData = reactive([]);

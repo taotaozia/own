@@ -7,11 +7,13 @@ import AGVCategory from "@/views/product/product_agv/Category.vue";
 import AGVList from "@/views/product/product_agv/List.vue";
 import AGVDetail from "@/views/product/product_agv/Details.vue";
 import AGVDownload from "@/views/product/product_agv/Download.vue";
-import StoreCategory from "@/views/product/product_storage/Category.vue";
+import StorageCategory from "@/views/product/product_storage/Category.vue";
+import StorageList from "@/views/product/product_storage/List.vue";
+import StorageDetail from "@/views/product/product_storage/Details.vue";
+import StorageDownload from  "@/views/product/product_storage/Download.vue"
 import ShutCategory from "@/views/product/product_shutdown/Category.vue";
+
 import AGVSummary from "@/views/project/project_agv/summary.vue";
-// @ts-ignore
-import { getRouters } from "@/api/http";
 import { useStore } from "vuex";
 import { ref } from "vue";
 
@@ -39,7 +41,10 @@ const routes: Array<RouteRecordRaw> = [
           { path: "agvdetails", name: "agvdetails", meta: { title: "AGV详情页" }, component: AGVDetail },
           { path: "agvdownloads", name: "agvdownloads", meta: { title: "AGV下载内容" }, component: AGVDownload },
           // *********** storage *************
-          { path: "storecategory", name: "storecategory", meta: { title: "仓储产品类别" }, component: StoreCategory },
+          { path: "storagecategory", name: "storagecategory", meta: { title: "仓储产品类别" }, component: StorageCategory },
+          { path: "storagelist", name: "storagelist", meta: { title: "仓储列表" }, component: StorageList },
+          { path: "storagedetails", name: "storagedetails", meta: { title: "仓储详情页" }, component: StorageDetail },
+          { path: "storagedownloads", name: "storagedownloads", meta: { title: "仓储下载内容" }, component: StorageDownload },
           // *********** shutdown *************
           { path: "shutcategory", name: "shutcategory", meta: { title: "关节产品类别" }, component: ShutCategory }
         ]
