@@ -1,5 +1,4 @@
-import axios from "axios";
-import request, { download, downloadGet, uploadPost } from "@/api/request";
+import request, { download, uploadPost } from "@/api/request";
 
 // ============= 用户接口 =============
 // 登录
@@ -35,6 +34,17 @@ export const putUpdateAdmin = (admin) => {
 export const deleteAdmin = (id) => {
   return request.delete("/admin/deleteadmin?id=" + id);
 };
+
+export const getLog = (log) => {
+  return request.post("/admin/getlog", log);
+};
+export const addLog = (DayLog) => {
+  return request.post("/admin/addlog", DayLog);
+};
+export const deleteLog = (id) => {
+  return request.delete("/admin/deletelog?id=" + id);
+};
+
 
 // ============ 权限管理 ===============
 // 获取所有需要限制的路由信息

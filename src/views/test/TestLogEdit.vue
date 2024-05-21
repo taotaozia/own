@@ -3,7 +3,6 @@
     <template #header>
       <div><span>日志功能</span></div>
     </template>
-
     <div class="dayLog">
       <div class="day">
         <h4 style="float: left;margin-top: 5px;margin-left: 20px">日期：</h4>

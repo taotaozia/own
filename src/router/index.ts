@@ -10,7 +10,7 @@ import AGVDownload from "@/views/product/product_agv/Download.vue";
 import StorageCategory from "@/views/product/product_storage/Category.vue";
 import StorageList from "@/views/product/product_storage/List.vue";
 import StorageDetail from "@/views/product/product_storage/Details.vue";
-import StorageDownload from  "@/views/product/product_storage/Download.vue"
+import StorageDownload from "@/views/product/product_storage/Download.vue";
 import ShutCategory from "@/views/product/product_shutdown/Category.vue";
 
 import AGVSummary from "@/views/project/project_agv/summary.vue";
@@ -41,10 +41,15 @@ const routes: Array<RouteRecordRaw> = [
           { path: "agvdetails", name: "agvdetails", meta: { title: "AGV详情页" }, component: AGVDetail },
           { path: "agvdownloads", name: "agvdownloads", meta: { title: "AGV下载内容" }, component: AGVDownload },
           // *********** storage *************
-          { path: "storagecategory", name: "storagecategory", meta: { title: "仓储产品类别" }, component: StorageCategory },
+          {
+            path: "storagecategory",
+            name: "storagecategory",
+            meta: { title: "仓储产品类别" },
+            component: StorageCategory
+          },
           { path: "storagelist", name: "storagelist", meta: { title: "仓储列表" }, component: StorageList },
           { path: "storagedetails", name: "storagedetails", meta: { title: "仓储详情页" }, component: StorageDetail },
-          { path: "storagedownloads", name: "storagedownloads", meta: { title: "仓储下载内容" }, component: StorageDownload },
+          { path: "storagedownloads", name: "storagedownloads", component: StorageDownload },
           // *********** shutdown *************
           { path: "shutcategory", name: "shutcategory", meta: { title: "关节产品类别" }, component: ShutCategory }
         ]
@@ -58,7 +63,8 @@ const routes: Array<RouteRecordRaw> = [
           { path: "agvsummary", name: "agvsummary", meta: { title: "AGV项目资源" }, component: AGVSummary }
         ]
       },
-
+      // ========= manage ============
+      { path: "/manage", name: "manage", component: () => import("@/views/ProjectManage/Index.vue"), children: [] },
       // ========= Edit ============
       { path: "/edit", name: "edit", component: () => import("@/views/edit/Index.vue"), children: [] }
       // end layout children
