@@ -3,15 +3,15 @@ import Cookies from "js-cookie";
 import Home from "@/views/home/Home.vue";
 import UserData from "@/views/user/UserData.vue";
 import Company from "@/views/company/Company.vue";
-import AGVCategory from "@/views/product/product_agv/Category.vue";
-import AGVList from "@/views/product/product_agv/List.vue";
-import AGVDetail from "@/views/product/product_agv/Details.vue";
-import AGVDownload from "@/views/product/product_agv/Download.vue";
-import StorageCategory from "@/views/product/product_storage/Category.vue";
-import StorageList from "@/views/product/product_storage/List.vue";
-import StorageDetail from "@/views/product/product_storage/Details.vue";
-import StorageDownload from "@/views/product/product_storage/Download.vue";
-import ShutCategory from "@/views/product/product_shutdown/Category.vue";
+import AGVCategory from "@/views/product/productAGV/Category.vue";
+import AGVList from "@/views/product/productAGV/List.vue";
+import AGVDetail from "@/views/product/productAGV/Details.vue";
+import AGVDownload from "@/views/product/productAGV/Download.vue";
+import StorageCategory from "@/views/product/productStorage/Category.vue";
+import StorageList from "@/views/product/productStorage/List.vue";
+import StorageDetail from "@/views/product/productStorage/Details.vue";
+import StorageDownload from "@/views/product/productStorage/Download.vue";
+import JointCategory from "@/views/product/productJoint/Category.vue";
 
 import AGVSummary from "@/views/project/project_agv/summary.vue";
 import { useStore } from "vuex";
@@ -24,6 +24,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/", name: "layout",
     component: () => import("@/views/Layout.vue"),
     children: [
+
       // ======== home =========
       { path: "/home", name: "home", meta: { title: "系统首页" }, component: Home },
       // ======== userData ========
@@ -38,7 +39,7 @@ const routes: Array<RouteRecordRaw> = [
           // *********** agv *************
           { path: "agvcategory", name: "agvcategory", meta: { title: "AGV产品类别" }, component: AGVCategory },
           { path: "agvlist", name: "agvlist", meta: { title: "AGV列表" }, component: AGVList },
-          { path: "agvdetails", name: "agvdetails", meta: { title: "AGV详情页" }, component: AGVDetail },
+          { path: "agvdetails/:DUID?", name: "agvdetails", meta: { title: "AGV详情页" }, component: AGVDetail },
           { path: "agvdownloads", name: "agvdownloads", meta: { title: "AGV下载内容" }, component: AGVDownload },
           // *********** storage *************
           {
@@ -51,7 +52,7 @@ const routes: Array<RouteRecordRaw> = [
           { path: "storagedetails", name: "storagedetails", meta: { title: "仓储详情页" }, component: StorageDetail },
           { path: "storagedownloads", name: "storagedownloads", component: StorageDownload },
           // *********** shutdown *************
-          { path: "shutcategory", name: "shutcategory", meta: { title: "关节产品类别" }, component: ShutCategory }
+          { path: "jointcategory", name: "jointcategory", meta: { title: "关节产品类别" }, component: JointCategory }
         ]
         // end product
       },

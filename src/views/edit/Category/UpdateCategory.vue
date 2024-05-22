@@ -35,7 +35,7 @@
         </el-form-item>
         <el-form-item class="button">
           <el-button type="primary" @click="onSubmit">确认</el-button>
-          <el-button @click="tiaozhuan.push('/edit/category')">取消</el-button>
+          <el-button @click="tiaozhuan.push('/edit/cate')">取消</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -53,15 +53,13 @@ const tiaozhuan = useRouter();
 
 let category = ref({});
 onMounted(() => {
-  const id = jieshou.query.id;
+  const id = localStorage.getItem("/edit/updateCategory");
   if (id) {
     getCategory(id).then((res) => {
       if (res.code === "200") {
         category.value = res.data;
       }
     });
-  } else {
-    tiaozhuan.push("/edit/category");
   }
 });
 

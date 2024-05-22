@@ -7,8 +7,8 @@
     <el-table :data="TableData.value" style="width: 100%;height: 500px">
       <el-table-column fixed="left" type="index" label="序号" width="60" />
       <el-table-column prop="require1" label="条件1" width="100"/>
-      <el-table-column prop="require2" label="条件2" />
-      <el-table-column prop="require3" label="条件3" />
+      <el-table-column prop="parentID" label="上级路由ID" />
+      <el-table-column prop="parentName" label="上级路由名称" />
       <el-table-column prop="routerMenuFlag" label="导航窗口是否显示" />
       <el-table-column prop="routerMenuIndex" label="导航窗格跳转路由" width="150"/>
       <el-table-column prop="routerTitle" label="导航描述" width="150"/>

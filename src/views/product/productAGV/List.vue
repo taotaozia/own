@@ -166,7 +166,9 @@ const proListRes = ref({
 //函数
 const lookdetail = (row) => {
   if (row.valueOf().detailID !== "") {
-    tiaozhuan.push({ path: "/product/agvdetails", query: { DUID: row.valueOf().detailID } });
+    localStorage.setItem("product/agvdetails" ,row.valueOf().detailID);
+    tiaozhuan.push("/product/agvdetails");
+    // tiaozhuan.push({ name: "agvdetails", params: { DUID: row.valueOf().detailID } });
   } else {
     ElMessage.error("该产品没有详情页，请联系管理员添加");
   }

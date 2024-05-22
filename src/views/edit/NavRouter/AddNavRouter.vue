@@ -9,10 +9,10 @@
           <el-input v-model="navrouter.require1" placeholder="管理员的权限，如：一级管理员" />
         </el-form-item>
         <el-form-item label="条件2">
-          <el-input v-model="navrouter.require2" placeholder="管理员的权限，暂时没用到" />
+          <el-input v-model="navrouter.parentID" placeholder="上级路由ID" />
         </el-form-item>
         <el-form-item label="条件3">
-          <el-input v-model="navrouter.require3" placeholder="管理员的权限，暂时没用到" />
+          <el-input v-model="navrouter.parentName" placeholder="上级路由名称" />
         </el-form-item>
         <el-form-item label="导航窗口是否显示">
           <el-radio-group v-model="navrouter.routerMenuFlag">
@@ -64,8 +64,8 @@ let navrouter = ref({
   id: 0,
   uuid: "",
   require1: "",
-  require2: "",
-  require3: "",
+  parentID: "",
+  parentName: "",
   routerMenuFlag: "",
   routerMenuIndex: "",
   routerTitle: "",

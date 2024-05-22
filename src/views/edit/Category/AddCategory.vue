@@ -35,7 +35,7 @@
         </el-form-item>
         <el-form-item class="button">
           <el-button type="primary" @click="onSubmit">确认</el-button>
-          <el-button @click="tiaozhuan.push('/edit/category')">取消</el-button>
+          <el-button @click="tiaozhuan.push('/edit/cate')">取消</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -44,11 +44,10 @@
 
 <script setup>
 import { reactive, ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import dayjs from "dayjs";
 import { postAddCategory, postUploadPng } from "@/api/http";
 
-const jieshou = useRoute();
 const tiaozhuan = useRouter();
 
 let category = ref({
@@ -99,7 +98,7 @@ const onSubmit = async () => {
           postAddCategory(JSON.stringify(category.value.valueOf())).then((res) => {
             if (res.code === "200") {
               ElMessage.success("更新成功");
-              tiaozhuan.push("/edit/category");
+              tiaozhuan.push("/edit/agvcategory");
             } else {
               ElMessage.error("更新失败，请联系管理员");
             }

@@ -27,7 +27,7 @@
 import { ElTable } from "element-plus";
 import { onMounted, reactive, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { getDownload, getDownloadTable } from "@/api/http";
+import { getCategory, getDownload, getDownloadTable } from "@/api/http";
 
 let loading = ref(false);
 const jieshou = useRoute();
@@ -35,12 +35,13 @@ const tiaozhuan = useRouter();
 let downloadData = reactive([]);
 onMounted(() => {
   const PUID = jieshou.query.PUID;
-  getDownloadTable(PUID).then((res) => {
-    if (res.code === "200") {
-      console.log(res);
-      downloadData.value = res.data;
-    }
-  });
+  if (PUID) {
+    getDownloadTable(PUID).then((res) => {
+      if (res.code === "200") {
+        downloadData.value = res.data;
+      }
+    });
+  }
 });
 const download = (row) => {
   ElMessage.warning("下载中，请勿操作");
@@ -48,27 +49,27 @@ const download = (row) => {
   getDownload(row.id).then(res => {
     if (res.status === 200) {
       const link = document.createElement("a");
+      console.log(res.data);
       let blob = new Blob([res.data]);
-      if (blob.size === 0) {
-        ElMessage.error("系统错误：文件不存在，请联系管理员");
+      console.log(blob.size);
+      if (blob.size <= 100) {
         loading.value = false;
-        return;
+        ElMessage.error("系统错误：文件不存在，请联系管理员");
+      } else {
+        //文件名，中文无法解析的时候会显示 _(下划线),生产环境获取不到
+        let fileName = row.fileName;
+        link.style.display = "none";
+        // 兼容不同浏览器的URL对象
+        const url = window.URL || window.webkitURL;
+        link.href = url.createObjectURL(blob);
+        link.setAttribute("download", fileName);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        url.revokeObjectURL(link.href);//销毁url对象
+        loading.value = false;
+        ElMessage.success("下载成功，请在下载内容中查看");
       }
-      //文件名，中文无法解析的时候会显示 _(下划线),生产环境获取不到
-      let fileName = row.fileName;
-      link.style.display = "none";
-      // 兼容不同浏览器的URL对象
-      const url = window.URL || window.webkitURL;
-      link.href = url.createObjectURL(blob);
-      link.setAttribute("download", fileName);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      url.revokeObjectURL(link.href);//销毁url对象
-      loading.value = false;
-      ElMessage.success("下载成功，请在下载内容中查看");
-    } else {
-      ElMessage.error("系统错误：请联系管理员！");
     }
   });
 };

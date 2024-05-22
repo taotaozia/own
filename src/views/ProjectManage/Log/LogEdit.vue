@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card">
     <template #header>
-      <div><span>日志功能</span></div>
+      <div><span>日志填写</span></div>
     </template>
     <div class="dayLog">
       <div class="day">

@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const serverUrl = "http://192.168.3.237:8989/api";
 const request = axios.create({
@@ -8,12 +9,10 @@ const request = axios.create({
 // request 拦截器
 // 可以在请求前对请求做一些处理
 // 比如同一加 token，对请求参数统一加密
+
 request.interceptors.request.use(config => {
   config.headers["Content-Type"] = "application/json;charset=utf-8";
-  // const adminID = Cookies.get("adminID");
-  // if (admin !== undefined) {
-  //   config.headers["token"] = JSON.parse(admin).token;
-  // }
+  config.headers.set("adminID", Cookies.get("adminID"), true);
   return config;
 }, error => {
   return Promise.reject(error);
@@ -48,11 +47,11 @@ export const uploadPost = (url, data) => {
   );
 };
 export const download = (url) => {
+  const adminID = Cookies.get("adminID");
   return axios({
-      url: serverUrl + url,
-      method: "get",
-      responseType: "blob",
-      // headers: { "Content-Type": "multipart/form-data" }
-    }
-  );
+    url: serverUrl + url,
+    method: "get",
+    responseType: "blob",
+    headers: { "Content-Type": "multipart/form-data", "adminID": adminID }
+  });
 };
