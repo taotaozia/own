@@ -85,7 +85,7 @@ let download = ref({});
 const productSelects = reactive([]);
 const TableData = reactive([]);
 onMounted(() => {
-  const id = jieshou.query.id;
+  const id = localStorage.getItem("/edit/updateDownload");
   if (id) {
     getDownloadSQL(id).then((res) => {
       if (res.code === "200") {

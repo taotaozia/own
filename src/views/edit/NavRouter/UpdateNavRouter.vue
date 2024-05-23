@@ -60,7 +60,7 @@ const tiaozhuan = useRouter();
 
 let navrouter = ref({});
 onMounted(() => {
-  const id = jieshou.query.id;
+  const id = localStorage.getItem("/edit/updaterouter")
   if (id){
     getRouter(id).then((res) => {
       if (res.code === "200") {
@@ -82,11 +82,10 @@ const onSubmit = () => {
     }
   });
 };
+
 </script>
 
 <style scoped>
-
-
 .button {
   padding-left: 200px;
 }

@@ -34,7 +34,7 @@ const jieshou = useRoute();
 const tiaozhuan = useRouter();
 let downloadData = reactive([]);
 onMounted(() => {
-  const PUID = jieshou.query.PUID;
+  const PUID = localStorage.getItem("product/agvdownloads");
   if (PUID) {
     getDownloadTable(PUID).then((res) => {
       if (res.code === "200") {

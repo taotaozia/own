@@ -17,8 +17,7 @@
         <el-table
           :show-header="false"
           :data="noticeData.value"
-          style="height: 200px"
-        >
+          style="height: 200px">
           <el-table-column>
             <template v-slot="scope">
               <el-button type="text" @click="openNotice(scope.row)">{{ scope.row.title }}</el-button>

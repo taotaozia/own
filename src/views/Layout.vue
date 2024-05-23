@@ -17,8 +17,6 @@
 <script setup>
 import MyMenu from "@/views/Utils/MyMenu.vue";
 import Content from "@/views/Utils/Content.vue";
-
-
 </script>
 
 <style lang="less" scoped>

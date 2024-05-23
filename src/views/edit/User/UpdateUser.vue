@@ -55,7 +55,7 @@ const tiaozhuan = useRouter();
 
 let admin = ref({});
 onMounted(() => {
-  const id = jieshou.query.id;
+  const id = localStorage.getItem("/edit/updateUser");
   if (id) {
     getAdmin(id).then((res) => {
       if (res.code === "200") {

@@ -1,5 +1,4 @@
 <template>
-  <!-- default-active 刷新之后跳转到首页 -->
   <el-menu
     default-active="route"
     class="el-menu-vertical-demo"
@@ -7,7 +6,6 @@
     text-color="#fff"
     active-text-color="#ffd04b"
     router>
-    <!--<li v-for="(v,i) in "></li>-->
     <el-menu-item index="/home">
       <img src="../../assets/iconhome.png" height="20" width="20" style="margin-right: 10px" />
       <span>系统首页</span>
@@ -24,7 +22,7 @@
       <el-menu-item-group>
         <el-menu-item index="/product/agvcategory">移动机器人</el-menu-item>
         <el-menu-item index="/product/storagecategory">智能仓储</el-menu-item>
-        <el-menu-item index="/product/shutcategory">关节机器人</el-menu-item>
+        <el-menu-item index="/product/jointcategory">关节机器人</el-menu-item>
       </el-menu-item-group>
     </el-sub-menu>
     <el-sub-menu index="/project">

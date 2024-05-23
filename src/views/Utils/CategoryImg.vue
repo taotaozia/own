@@ -47,7 +47,8 @@ const readImg = (imgName) => {
   return "http://192.168.3.237:6688/img/static/" + imgName;
 };
 const getlist = (CUID) => {
-  tiaozhuan.push({ path: props.TZPath, query: { CUID: CUID } });
+  localStorage.setItem(props.TZPath, CUID);
+  tiaozhuan.push(props.TZPath);
 };
 </script>
 

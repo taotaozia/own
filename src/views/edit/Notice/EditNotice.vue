@@ -18,10 +18,7 @@
             </el-button>
           </template>
           <template #default="scope">
-            <el-button size="small"
-                       @click="tiaozhuan.push({ path: '/edit/updateNotice', query: { id: scope.row.id } })">
-              编辑
-            </el-button>
+            <el-button size="small" @click="handleUpdate(scope.row)">编辑</el-button>
             <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>
           </template>
         </el-table-column>
@@ -69,7 +66,10 @@ const handleDelete = (row) => {
     });
 };
 
-
+const handleUpdate = (row) => {
+  localStorage.setItem("/edit/updateNotice", row.id);
+  tiaozhuan.push("/edit/updateNotice");
+};
 </script>
 
 <style>

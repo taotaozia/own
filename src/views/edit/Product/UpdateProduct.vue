@@ -94,7 +94,7 @@ const rules = {
 };
 
 onMounted(() => {
-  const id = jieshou.query.id;
+  const id = localStorage.getItem("/edit/updateProduct");
   if (id) {
     getProduct(id).then((res) => {
       if (res.code === "200") {
@@ -103,18 +103,15 @@ onMounted(() => {
     });
     getDetailProTypeSelect().then((res) => {
       if (res.code === "200") {
-        selectvalue(res.data.cateSelects, categorySelects);
-        selectvalue(res.data.detSelects, detailSelects);
+        selectValue(res.data.cateSelects, categorySelects);
+        selectValue(res.data.detSelects, detailSelects);
       }
     });
-  } else {
-    tiaozhuan.push("/edit/products");
-    return;
   }
 });
-const selectvalue = (datavalue, select) => {
-  for (let i = 0; i < datavalue.length; i++) {
-    select[i] = { id: i + 1, value: datavalue[i] };
+const selectValue = (dataValue, select) => {
+  for (let i = 0; i < dataValue.length; i++) {
+    select[i] = { id: i + 1, value: dataValue[i] };
   }
 };
 // 选择器的东西

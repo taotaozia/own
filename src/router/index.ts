@@ -39,7 +39,7 @@ const routes: Array<RouteRecordRaw> = [
           // *********** agv *************
           { path: "agvcategory", name: "agvcategory", meta: { title: "AGV产品类别" }, component: AGVCategory },
           { path: "agvlist", name: "agvlist", meta: { title: "AGV列表" }, component: AGVList },
-          { path: "agvdetails/:DUID?", name: "agvdetails", meta: { title: "AGV详情页" }, component: AGVDetail },
+          { path: "agvdetails", name: "agvdetails", meta: { title: "AGV详情页" }, component: AGVDetail },
           { path: "agvdownloads", name: "agvdownloads", meta: { title: "AGV下载内容" }, component: AGVDownload },
           // *********** storage *************
           {

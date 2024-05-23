@@ -6,11 +6,7 @@
     <div class="right">
       <div class="message">
         <el-tooltip effect="light" content="个人消息">
-          <el-button type="warning" style="margin-right: 10px" circle @click="table = true">
-            <el-icon>
-              <ChatLineRound />
-            </el-icon>
-          </el-button>
+          <el-button :icon="ChatLineRound" type="warning" style="margin-right: 10px" circle @click="table = true" />
         </el-tooltip>
         <el-drawer
           v-model="table"
@@ -30,9 +26,7 @@
           </template>
         </el-dropdown>
       </div>
-      <!--end right-->
     </div>
-    <!--end head-->
   </div>
 </template>
 
@@ -42,6 +36,7 @@ import { useRouter } from "vue-router";
 import Cookies from "js-cookie";
 import { useStore } from "vuex";
 import UserNotice from "@/views/Utils/UserNotice.vue";
+import { ChatLineRound } from "@element-plus/icons-vue/global";
 
 // 变量
 const store = useStore();

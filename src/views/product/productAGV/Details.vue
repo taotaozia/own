@@ -79,8 +79,7 @@
 <script setup>
 import { onMounted, reactive, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import request from "@/api/request";
-import { getDetailTable, getLoadPng } from "@/api/http";
+import { getDetailTable } from "@/api/http";s
 
 const jieshou = useRoute();
 const tiaozhuan = useRouter();
@@ -99,7 +98,7 @@ const activeName = ref("");
 
 // 初始化方法
 onMounted(() => {
-  let DUID = localStorage.getItem("product/agvdetails" )
+  let DUID = localStorage.getItem("product/agvdetails");
   // 选项内容
   getDetailTable(DUID).then((res) => {
     if (res.code === "200") {

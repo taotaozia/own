@@ -1,14 +1,14 @@
 <template>
   <div style="overflow: hidden">
     <div class="title">
-<!--      <h1>移动机器人产品汇总</h1>-->
+      <!--      <h1>移动机器人产品汇总</h1>-->
     </div>
     <div class="prod">
       <div>
-        <CategoryImg :data="updata" TZPath="/product/agvlist"></CategoryImg>
+        <CategoryImg :data="updata" TZPath="/product/agvlist" />
       </div>
       <div>
-        <CategoryImg :data="downdata"></CategoryImg>
+        <CategoryImg :data="downdata" TZPath="/product/agvlist" />
       </div>
     </div>
   </div>
@@ -16,9 +16,8 @@
 
 <script setup>
 import { onMounted, reactive } from "vue";
-import request from "@/api/request";
 import CategoryImg from "@/views/Utils/CategoryImg.vue";
-import { getCategoryClass, getCategorys } from "@/api/http";
+import { getCategoryClass } from "@/api/http";
 
 
 let updata = reactive([]);

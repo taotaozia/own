@@ -17,20 +17,10 @@
       <el-table-column>
         <template v-slot="tableData">
           <el-tooltip effect="light" content="查看详情">
-            <el-button type="primary"
-                       @click="lookdetail(tableData.row)">
-              <el-icon>
-                <ZoomIn />
-              </el-icon>
-            </el-button>
+            <el-button :icon="ZoomIn" type="primary" @click="lookdetail(tableData.row)" />
           </el-tooltip>
           <el-tooltip effect="light" content="资源下载">
-            <el-button type="warning" style="margin-left: 5px"
-                       @click="tiaozhuan.push({ path: '/product/agvdownloads', query: { PUID: tableData.row.valueOf().productId } });">
-              <el-icon>
-                <Download />
-              </el-icon>
-            </el-button>
+            <el-button :icon="Download" type="warning" style="margin-left: 5px" @click="lookDownload(tableData.row)" />
           </el-tooltip>
         </template>
       </el-table-column>
@@ -53,6 +43,7 @@ import { onMounted, reactive, ref } from "vue";
 import { ElTable } from "element-plus";
 import { useRoute, useRouter } from "vue-router";
 import { getProductSelect, putProductList } from "@/api/http";
+import { Download, ZoomIn } from "@element-plus/icons-vue/global";
 
 const jieshou = useRoute();
 const tiaozhuan = useRouter();
@@ -73,7 +64,7 @@ const tableData = reactive([]);
 
 //初始化方法
 onMounted(() => {
-  let CUID = jieshou.query.CUID;
+  let CUID = localStorage.getItem("/product/storagelist");
   // 列表内容
   search();
   // 选项内容
@@ -93,7 +84,7 @@ onMounted(() => {
 const proListRes = ref({
   pageNum: currentPage.value,
   pageSize: pageSize.valueOf(),
-  category: jieshou.query.CUID,
+  category: localStorage.getItem("/product/storagelist"),
   load: "",
   chassis: "",
   control: "",
@@ -103,10 +94,15 @@ const proListRes = ref({
 //函数
 const lookdetail = (row) => {
   if (row.valueOf().detailID !== "") {
-    tiaozhuan.push({ path: "/product/agvdetails", query: { DUID: row.valueOf().detailID } });
+    localStorage.setItem("/product/storagedetails", row.valueOf().detailID);
+    tiaozhuan.push("/product/storagedetails");
   } else {
     ElMessage.error("该产品没有详情页，请联系管理员添加");
   }
+};
+const lookDownload = (row) => {
+  localStorage.setItem("/product/storagedownloads", row.valueOf().detailID);
+  tiaozhuan.push("/product/storagedownloads");
 };
 // 赋值选项
 const selectvalue = (datavalue, select) => {

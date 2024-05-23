@@ -1,24 +1,24 @@
 <template>
 
-    <div class="prod" style="margin-top: 8vh">
+  <div class="prod" style="margin-top: 8vh">
+    <div
+      class="maskContainer"
+      v-for="(item, index) in data1.value"
+      :key="index">
       <div
-        class="maskContainer"
-        v-for="(item, index) in data1.value"
-        :key="index">
-        <div
-          class="backImg"
-          @click="getlist(item.categoryId)"
-          @mouseover="addActive($event)"
-          @mouseout="removeActive($event)">
-          <h2 style="text-align: center; color: #757575;margin-top: 20px">
-            {{ item.categoryName }}
-          </h2>
-          <div class="img">
-            <el-image :src="readImg(item.picture)" alt="" class="originalImg" />
-          </div>
+        class="backImg"
+        @click="getlist(item.categoryId)"
+        @mouseover="addActive($event)"
+        @mouseout="removeActive($event)">
+        <h2 style="text-align: center; color: #757575;margin-top: 20px">
+          {{ item.categoryName }}
+        </h2>
+        <div class="img">
+          <el-image :src="readImg(item.picture)" alt="" class="originalImg" />
         </div>
       </div>
     </div>
+  </div>
 </template>
 <script setup>
 import { onMounted, reactive } from "vue";
@@ -38,7 +38,8 @@ const readImg = (imgName) => {
   return "http://192.168.3.237:6688/img/static/" + imgName;
 };
 const getlist = (CUID) => {
-  tiaozhuan.push({ path:"/product/storagelist" , query: { CUID: CUID } });
+  localStorage.setItem("/product/storagelist", CUID);
+  tiaozhuan.push("/product/storagelist");
 };
 let data1 = reactive([]);
 // 初始化方法
@@ -53,7 +54,7 @@ onMounted(() => {
 </script>
 <style scoped>
 
-.maskContainer{
+.maskContainer {
   display: inline-block;
   position: relative;
   width: 30vw;
@@ -62,10 +63,12 @@ onMounted(() => {
   margin-left: 8vw;
   border-radius: 20px;
 }
+
 .backImg-active {
   border-radius: 20px;
   background-color: #bdbdbd;
 }
+
 .img {
   position: relative;
   text-align: center;
