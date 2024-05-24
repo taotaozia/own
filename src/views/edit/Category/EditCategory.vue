@@ -19,9 +19,7 @@
             </el-button>
           </template>
           <template #default="scope">
-            <el-button size="small" @click="handleUpdate(scope.row)">
-              编辑
-            </el-button>
+            <el-button size="small" @click="handleUpdate(scope.row)">编辑</el-button>
             <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>
           </template>
         </el-table-column>

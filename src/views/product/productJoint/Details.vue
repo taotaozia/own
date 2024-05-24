@@ -1,12 +1,10 @@
 <template>
   <div class="title"><h2>《 {{ name }} 》</h2></div>
   <div class="topimg">
-    <div>
-      <div class="maskContainer"
-           v-for="(item,index) in imgdata" :key="index">
-        <div class="img">
-          <el-image class="originalImg" :src="readImg(item)" />
-        </div>
+    <div class="maskContainer"
+         v-for="(item,index) in imgdata" :key="index">
+      <div class="img">
+        <el-image class="originalImg" :src="readImg(item)" />
       </div>
     </div>
   </div>
@@ -17,7 +15,7 @@
           <el-table
             class="parameterTable"
             :show-header="false"
-            :data="parameterData"
+            :data="dataList1"
             :span-method="objectSpanMethod"
             style="width: 1000px"
             border>
@@ -27,12 +25,12 @@
           </el-table>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="运动性能" name="second">
+      <el-tab-pane label="详情参数" name="second">
         <div class="table2">
           <el-table
             class="parameterTable"
             :show-header="false"
-            :data="sportData"
+            :data="dataList2"
             :span-method="objectSpanMethod"
             style="width: 1000px"
             border>
@@ -47,7 +45,7 @@
           <el-table
             class="configTable"
             :show-header="false"
-            :data="safetyData"
+            :data="dataList3"
             :span-method="objectSpanMethod"
             style="width: 1000px"
             border>
@@ -62,7 +60,7 @@
           <el-table
             class="batteryTable"
             :show-header="false"
-            :data="batteryData"
+            :data="dataList4"
             :span-method="objectSpanMethod"
             style="width: 1000px"
             border>
@@ -88,26 +86,26 @@ const tiaozhuan = useRouter();
 const imgdata = ref([]);
 const name = ref([]);
 // 表格数据
-let parameterData = reactive([]);
-let sportData = reactive([]);
-let safetyData = reactive([]);
-let batteryData = reactive([]);
+let dataList1 = reactive([]);
+let dataList2 = reactive([]);
+let dataList3 = reactive([]);
+let dataList4 = reactive([]);
 
 // 标签
 const activeName = ref("");
 
 // 初始化方法
 onMounted(() => {
-  let DUID = localStorage.getItem("product/agvdetails");
+  let DUID = localStorage.getItem("/product/jointdetails");
   // 选项内容
   getDetailTable(DUID).then((res) => {
     if (res.code === "200") {
       name.value = res.data.name;
       imgdata.value = res.data.imgData;
-      parameterData = res.data.dataList1;
-      sportData = res.data.dataList2;
-      safetyData = res.data.dataList3;
-      batteryData = res.data.dataList4;
+      dataList1 = res.data.dataList1;
+      dataList2 = res.data.dataList2;
+      dataList3 = res.data.dataList3;
+      dataList4 = res.data.dataList4;
       activeName.value = "first";
     }
   });

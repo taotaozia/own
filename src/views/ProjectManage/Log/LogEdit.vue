@@ -96,11 +96,10 @@ const handleCreated = (editor) => {
 
 const addDayLog = () => {
   DayLog.value.workLog = valueHtml.value;
-  console.log(JSON.stringify(DayLog.value));
   addLog(JSON.stringify(DayLog.value)).then(res => {
-    console.log(res)
     if (res.code === "200") {
       ElNotification.success("添加成功");
+      valueHtml.value = "";
     }
   });
 };

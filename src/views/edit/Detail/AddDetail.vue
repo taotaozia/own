@@ -56,15 +56,18 @@
         <el-form-item label="详情页名称">
           <el-input v-model="detail.detailName" />
         </el-form-item>
+        <el-form-item label="类型" style="margin-left: -50px">
+          <el-select v-model="detail.classify" style="width: 200px">
+            <el-option label="移动机器人" value="移动机器人" />
+            <el-option label="智能仓储" value="智能仓储" />
+            <el-option label="关节机器人" value="关节机器人" />
+          </el-select>
+        </el-form-item>
         <el-table :data="detail.paramList" style="width: 100%;height: 400px">
           <el-table-column fixed="left" type="index" width="85">
             <template #header>
               序号
-              <el-button type="primary" size="small" @click="addParams" circle>
-                <el-icon>
-                  <Plus />
-                </el-icon>
-              </el-button>
+              <el-button :icon="Plus" type="primary" size="small" @click="addParams" circle />
             </template>
           </el-table-column>
           <el-table-column type="type" label="类型">
@@ -79,7 +82,7 @@
           </el-table-column>
           <el-table-column type="contents" label="数值">
             <template #default="scope">
-              <el-input v-model="scope.row.content" />
+              <el-input v-model="scope.row.contents" />
             </template>
           </el-table-column>
         </el-table>
@@ -98,6 +101,7 @@ import { useRoute, useRouter } from "vue-router";
 import dayjs from "dayjs";
 import { postAddDetail, postUploadMul } from "@/api/http";
 import { ElTable } from "element-plus";
+import { Plus } from "@element-plus/icons-vue/global";
 
 const jieshou = useRoute();
 const tiaozhuan = useRouter();
@@ -105,6 +109,7 @@ const tiaozhuan = useRouter();
 let detail = ref({
   id: 0,
   detailID: "",
+  classify: "",
   detailName: "",
   createtime: dayjs(new Date()).format("YYYY-MM-DD"),
   updatetime: dayjs(new Date()).format("YYYY-MM-DD"),

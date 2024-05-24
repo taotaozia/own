@@ -65,7 +65,7 @@ const form = ref();
 const rules = {
   categoryName: [{ required: true, message: "请输入类型名称", trigger: "blur" }],
   classify: [{ required: true, message: "请选择产品所属", trigger: "blur" }],
-  categoryDescription: [{ required: true, message: "为产品添加个描述吧", trigger: "blur" }]
+  // categoryDescription: [{ required: true, message: "为产品添加个描述吧", trigger: "blur" }]
 };
 
 // 上传文件的功能
@@ -98,7 +98,7 @@ const onSubmit = async () => {
           postAddCategory(JSON.stringify(category.value.valueOf())).then((res) => {
             if (res.code === "200") {
               ElMessage.success("更新成功");
-              tiaozhuan.push("/edit/agvcategory");
+              tiaozhuan.push("/edit/cate");
             } else {
               ElMessage.error("更新失败，请联系管理员");
             }

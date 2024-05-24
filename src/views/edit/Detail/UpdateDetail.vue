@@ -57,6 +57,13 @@
         <el-form-item label="详情页名称">
           <el-input v-model="detail.detailName" />
         </el-form-item>
+        <el-form-item label="类型" style="margin-left: -50px">
+          <el-select v-model="detail.classify" style="width: 200px">
+            <el-option label="移动机器人" value="移动机器人" />
+            <el-option label="智能仓储" value="智能仓储" />
+            <el-option label="关节机器人" value="关节机器人" />
+          </el-select>
+        </el-form-item>
         <el-table :data="detail.paramList" style="width: 100%;height: 400px">
           <el-table-column fixed="left" type="index" width="85">
             <template #header>
@@ -107,15 +114,13 @@ const tiaozhuan = useRouter();
 
 let detail = ref({});
 onMounted(() => {
-  const id = jieshou.query.id;
+  const id = localStorage.getItem("/edit/updateDetail");
   if (id) {
     getDetail(id).then(res => {
       if (res.code === "200") {
         detail.value = res.data;
       }
     });
-  } else {
-    tiaozhuan.push("/edit/detail");
   }
 });
 

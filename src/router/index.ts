@@ -12,6 +12,9 @@ import StorageList from "@/views/product/productStorage/List.vue";
 import StorageDetail from "@/views/product/productStorage/Details.vue";
 import StorageDownload from "@/views/product/productStorage/Download.vue";
 import JointCategory from "@/views/product/productJoint/Category.vue";
+import JointList from "@/views/product/productJoint/List.vue";
+import JointDetail from "@/views/product/productJoint/Details.vue";
+import JointDownload from "@/views/product/productJoint/Download.vue";
 
 import AGVSummary from "@/views/project/project_agv/summary.vue";
 import { useStore } from "vuex";
@@ -24,7 +27,6 @@ const routes: Array<RouteRecordRaw> = [
     path: "/", name: "layout",
     component: () => import("@/views/Layout.vue"),
     children: [
-
       // ======== home =========
       { path: "/home", name: "home", meta: { title: "系统首页" }, component: Home },
       // ======== userData ========
@@ -42,19 +44,16 @@ const routes: Array<RouteRecordRaw> = [
           { path: "agvdetails", name: "agvdetails", meta: { title: "AGV详情页" }, component: AGVDetail },
           { path: "agvdownloads", name: "agvdownloads", meta: { title: "AGV下载内容" }, component: AGVDownload },
           // *********** storage *************
-          {
-            path: "storagecategory",
-            name: "storagecategory",
-            meta: { title: "仓储产品类别" },
-            component: StorageCategory
-          },
+          { path: "storagecategory", name: "storagecategory", component: StorageCategory },
           { path: "storagelist", name: "storagelist", meta: { title: "仓储列表" }, component: StorageList },
           { path: "storagedetails", name: "storagedetails", meta: { title: "仓储详情页" }, component: StorageDetail },
           { path: "storagedownloads", name: "storagedownloads", component: StorageDownload },
-          // *********** shutdown *************
-          { path: "jointcategory", name: "jointcategory", meta: { title: "关节产品类别" }, component: JointCategory }
+          // *********** joint *************
+          { path: "jointcategory", name: "jointcategory", meta: { title: "关节产品类别" }, component: JointCategory },
+          { path: "jointlist", name: "jointlist", meta: { title: "关节列表" }, component: JointList },
+          { path: "jointdetails", name: "jointdetails", meta: { title: "关节详情页" }, component: JointDetail },
+          { path: "jointdownloads", name: "jointdownloads", component: JointDownload }
         ]
-        // end product
       },
       // ========= project ============
       {
@@ -68,16 +67,12 @@ const routes: Array<RouteRecordRaw> = [
       { path: "/manage", name: "manage", component: () => import("@/views/ProjectManage/Index.vue"), children: [] },
       // ========= Edit ============
       { path: "/edit", name: "edit", component: () => import("@/views/edit/Index.vue"), children: [] }
-      // end layout children
     ]
   },
   { path: "/:pathMatch(.*)*", component: () => import("@/views/Utils/NotFound.vue") }
 ];
 
-const router = createRouter({
-  history: createWebHistory(),
-  routes
-});
+const router = createRouter({ history: createWebHistory(), routes });
 let load = ref(0);
 // 路由守卫
 router.beforeEach(async (to, from, next) => {

@@ -144,10 +144,51 @@ export const getProTypeSelect = () => {
 };
 
 // 获取产品关联选项 -- 详情页 + 产品类型
-export const getDetailProTypeSelect = () => {
-  return request.get("/product/getdetproselects");
+export const getDetailProTypeSelect = (classify) => {
+  return request.get("/product/getdetproselects?classify=" + classify);
 };
 
+export const getJointList = (category) => {
+  return request.get("/product/getjointlist?category=" + category);
+};
+export const getJoints = () => {
+  return request.get("/product/getjoints");
+};
+export const getJoint = (id) => {
+  return request.get("/product/getjoint?id=" + id);
+};
+export const postAddJoint = (joint) => {
+  return request.post("/product/addjoint", joint);
+};
+
+export const putUpdateJoint = (joint) => {
+  return request.put("/product/updatejoint", joint);
+};
+
+export const deleteJoint = (id) => {
+  return request.delete("/product/deletejoint?id=" + id);
+};
+
+export const getStorageList = (category) => {
+  return request.get("/product/getstoragelist?category=" + category);
+};
+export const getStorages = () => {
+  return request.get("/product/getstorages");
+};
+export const getStorage = (id) => {
+  return request.get("/product/getstorage?id=" + id);
+};
+export const postAddStorage = (storage) => {
+  return request.post("/product/addstorage", storage);
+};
+
+export const putUpdateStorage = (storage) => {
+  return request.put("/product/updatestorage", storage);
+};
+
+export const deleteStorage = (id) => {
+  return request.delete("/product/deletestorage?id=" + id);
+};
 // ============ 详情页接口 ============
 // 获取详情页表格内容
 export const getDetailTable = (DUID) => {
@@ -161,7 +202,7 @@ export const getDetails = () => {
 
 // 获取某个详情页
 export const getDetail = (id) => {
-  return request.get("/product/deletedetail?id=" + id);
+  return request.get("/product/getdetail?id=" + id);
 };
 
 // 添加详情页

@@ -15,9 +15,8 @@
       <el-tab-pane label="基本参数" name="first">
         <div class="table1">
           <el-table
-            class="parameterTable"
             :show-header="false"
-            :data="parameterData"
+            :data="dataList1"
             :span-method="objectSpanMethod"
             style="width: 1000px"
             border>
@@ -30,9 +29,8 @@
       <el-tab-pane label="运动性能" name="second">
         <div class="table2">
           <el-table
-            class="parameterTable"
             :show-header="false"
-            :data="sportData"
+            :data="dataList2"
             :span-method="objectSpanMethod"
             style="width: 1000px"
             border>
@@ -45,9 +43,8 @@
       <el-tab-pane label="安全防护" name="third">
         <div class="table3">
           <el-table
-            class="configTable"
             :show-header="false"
-            :data="safetyData"
+            :data="dataList3"
             :span-method="objectSpanMethod"
             style="width: 1000px"
             border>
@@ -60,9 +57,8 @@
       <el-tab-pane label="电池性能" name="fourth">
         <div class="table4">
           <el-table
-            class="batteryTable"
             :show-header="false"
-            :data="batteryData"
+            :data="dataList4"
             :span-method="objectSpanMethod"
             style="width: 1000px"
             border>
@@ -79,8 +75,7 @@
 <script setup>
 import { onMounted, reactive, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import request from "@/api/request";
-import { getDetailTable, getLoadPng } from "@/api/http";
+import { getDetailTable } from "@/api/http";
 
 const jieshou = useRoute();
 const tiaozhuan = useRouter();
@@ -89,10 +84,10 @@ const tiaozhuan = useRouter();
 const imgdata = ref([]);
 const name = ref([]);
 // 表格数据
-let parameterData = reactive([]);
-let sportData = reactive([]);
-let safetyData = reactive([]);
-let batteryData = reactive([]);
+let dataList1 = reactive([]);
+let dataList2 = reactive([]);
+let dataList3 = reactive([]);
+let dataList4 = reactive([]);
 
 // 标签
 const activeName = ref("");
@@ -105,10 +100,10 @@ onMounted(() => {
     if (res.code === "200") {
       name.value = res.data.name;
       imgdata.value = res.data.imgData;
-      parameterData = res.data.dataList1;
-      sportData = res.data.dataList2;
-      safetyData = res.data.dataList3;
-      batteryData = res.data.dataList4;
+      dataList1 = res.data.dataList1;
+      dataList2 = res.data.dataList2;
+      dataList3 = res.data.dataList3;
+      dataList4 = res.data.dataList4;
       activeName.value = "first";
     }
   });

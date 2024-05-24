@@ -117,7 +117,7 @@ const rules = {
 const categorySelects = reactive([]);
 const detailSelects = reactive([]);
 onMounted(() => {
-  getDetailProTypeSelect().then((res) => {
+  getDetailProTypeSelect("移动机器人").then((res) => {
     if (res.code === "200") {
       selectvalue(res.data.cateSelects, categorySelects);
       selectvalue(res.data.detSelects, detailSelects);

@@ -8,21 +8,15 @@
         <el-table-column fixed="left" type="index" label="序号" width="60" />
         <el-table-column prop="categoryName" label="关联产品" width="200" />
         <el-table-column prop="detailName" label="关联详情页" width="200" />
-        <el-table-column prop="productName" label="车辆名称" width="150" />
+        <el-table-column prop="storageName" label="产品名称" width="150" />
         <el-table-column prop="updatetime" label="更新时间" width="200" />
-        <el-table-column prop="productBOM" label="物料编号" width="150" />
-        <el-table-column prop="productDirector" label="负责人" width="100" />
-
-        <el-table-column prop="productType" label="类型编号" width="120" />
-        <el-table-column prop="productLoad" label="载重" width="60" />
-        <el-table-column prop="productModel" label="车型" width="100" />
-        <el-table-column prop="productControl" label="控制器" width="80" />
-        <el-table-column prop="productDrive" label="导航方式" width="150" />
-        <el-table-column prop="productChassis" label="底盘" width="100" />
+        <el-table-column prop="storageBOM" label="物料编号" width="150" />
+        <el-table-column prop="storageDirector" label="负责人" width="100" />
+        <el-table-column prop="storageType" label="类型编号" width="120" />
 
         <el-table-column fixed="right" width="150">
           <template #header>
-            <el-button type="warning" icon="Plus" size="small" @click="tiaozhuan.push('/edit/addProduct')">
+            <el-button type="warning" :icon="Plus" size="small" @click="tiaozhuan.push('/edit/addStorage')">
               添加
             </el-button>
           </template>
@@ -40,9 +34,9 @@
 <script setup>
 import { ElMessage, ElMessageBox, ElTable } from "element-plus";
 import { markRaw, onMounted, reactive } from "vue";
-import { Delete } from "@element-plus/icons-vue";
 import { useRouter } from "vue-router";
-import { deleteProduct, getProducts } from "@/api/http";
+import { deleteStorage, getStorages } from "@/api/http";
+import { Delete, Plus } from "@element-plus/icons-vue";
 
 const tiaozhuan = useRouter();
 const TableData = reactive([]);
@@ -50,17 +44,17 @@ onMounted(() => {
   loadData();
 });
 const loadData = () => {
-  getProducts().then((res) => {
+  getStorages().then((res) => {
     if (res.code === "200") {
       TableData.value = res.data;
     }
   });
 };
 const handleDelete = (row) => {
-  ElMessageBox.confirm("是否确认删除 " + row.productType + " 产品?",
+  ElMessageBox.confirm("是否确认删除 " + row.storageType + " 产品?",
     { confirmButtonText: "确认", cancelButtonText: "取消", type: "warning", icon: markRaw(Delete) })
     .then(() => {
-      deleteProduct(row.id).then((res) => {
+      deleteStorage(row.id).then((res) => {
         if (res.code === "200") {
           ElMessage.success("删除成功");
           loadData();
@@ -75,7 +69,7 @@ const handleDelete = (row) => {
 };
 
 const handleUpdate = (row) => {
-  localStorage.setItem("/edit/updateProduct", row.id);
-  tiaozhuan.push("/edit/updateProduct");
+  localStorage.setItem("/edit/updateStorage", row.id);
+  tiaozhuan.push("/edit/updateStorage");
 };
 </script>
