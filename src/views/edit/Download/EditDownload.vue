@@ -6,6 +6,7 @@
     <div>
       <el-table :data="TableData.value" style="width: 100%;height: 500px">
         <el-table-column fixed="left" type="index" label="序号" width="60" />
+        <el-table-column prop="classify" label="类型" width="120" />
         <el-table-column prop="productName" label="关联产品" width="120" />
         <el-table-column prop="downloadType" label="文件类型" width="120" />
         <el-table-column prop="downloadName" label="名称" width="200" />
@@ -31,7 +32,6 @@
 <script setup>
 import { ElMessage, ElMessageBox, ElTable } from "element-plus";
 import { markRaw, onMounted, reactive } from "vue";
-import request from "@/api/request";
 import { Delete } from "@element-plus/icons-vue";
 import { useRouter } from "vue-router";
 import { deleteDownload, getDownloads } from "@/api/http";
@@ -42,7 +42,7 @@ onMounted(() => {
   loadData();
 });
 const loadData = () => {
-  getDownloads().then((res) => {
+  getDownloads("").then((res) => {
     if (res.code === "200") {
       TableData.value = res.data;
     }

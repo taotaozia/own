@@ -63,6 +63,7 @@ const store = useStore();
 const routerData = ref({});
 onMounted(() => {
   routerData.value = store.state.router.routers;
+  console.log("添加导航完成")
 });
 
 </script>

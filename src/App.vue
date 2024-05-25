@@ -22,7 +22,7 @@ onMounted(() => {
       });
     }
   }
-  if (store.state.router.routers.length === 1) {
+  if (store.state.router.routers.length < 1) {
     const adminID = Cookies.get("adminID") ? Cookies.get("adminID") : "";
     if (adminID) {
       getRouters(adminID).then(res => {
