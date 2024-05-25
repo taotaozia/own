@@ -12,7 +12,7 @@
         <el-table-column prop="updatetime" label="更新时间" width="200" />
         <el-table-column prop="storageBOM" label="物料编号" width="150" />
         <el-table-column prop="storageDirector" label="负责人" width="100" />
-        <el-table-column prop="storageType" label="类型编号" width="120" />
+        <el-table-column prop="storageType" label="产品编号" width="120" />
 
         <el-table-column fixed="right" width="150">
           <template #header>

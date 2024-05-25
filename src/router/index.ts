@@ -5,16 +5,12 @@ import UserData from "@/views/user/UserData.vue";
 import Company from "@/views/company/Company.vue";
 import AGVCategory from "@/views/product/productAGV/Category.vue";
 import AGVList from "@/views/product/productAGV/List.vue";
-import AGVDetail from "@/views/product/productAGV/Details.vue";
-import AGVDownload from "@/views/product/productAGV/Download.vue";
+import AGVDetail from "@/views/product/Details.vue";
+import AGVDownload from "@/views/product/Download.vue";
 import StorageCategory from "@/views/product/productStorage/Category.vue";
 import StorageList from "@/views/product/productStorage/List.vue";
-import StorageDetail from "@/views/product/productStorage/Details.vue";
-import StorageDownload from "@/views/product/productStorage/Download.vue";
 import JointCategory from "@/views/product/productJoint/Category.vue";
 import JointList from "@/views/product/productJoint/List.vue";
-import JointDetail from "@/views/product/productJoint/Details.vue";
-import JointDownload from "@/views/product/productJoint/Download.vue";
 
 import AGVSummary from "@/views/project/project_agv/summary.vue";
 import { useStore } from "vuex";
@@ -38,21 +34,17 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: "/product", name: "product", component: () => import("@/views/product/Index.vue"),
         children: [
+          { path: "downloads", name: "downloads", meta: { title: "下载内容" }, component: AGVDownload },
+          { path: "details", name: "details", meta: { title: "详情页" }, component: AGVDetail },
           // *********** agv *************
           { path: "agvcategory", name: "agvcategory", meta: { title: "AGV产品类别" }, component: AGVCategory },
           { path: "agvlist", name: "agvlist", meta: { title: "AGV列表" }, component: AGVList },
-          { path: "agvdetails", name: "agvdetails", meta: { title: "AGV详情页" }, component: AGVDetail },
-          { path: "agvdownloads", name: "agvdownloads", meta: { title: "AGV下载内容" }, component: AGVDownload },
           // *********** storage *************
           { path: "storagecategory", name: "storagecategory", component: StorageCategory },
           { path: "storagelist", name: "storagelist", meta: { title: "仓储列表" }, component: StorageList },
-          { path: "storagedetails", name: "storagedetails", meta: { title: "仓储详情页" }, component: StorageDetail },
-          { path: "storagedownloads", name: "storagedownloads", component: StorageDownload },
           // *********** joint *************
           { path: "jointcategory", name: "jointcategory", meta: { title: "关节产品类别" }, component: JointCategory },
           { path: "jointlist", name: "jointlist", meta: { title: "关节列表" }, component: JointList },
-          { path: "jointdetails", name: "jointdetails", meta: { title: "关节详情页" }, component: JointDetail },
-          { path: "jointdownloads", name: "jointdownloads", component: JointDownload }
         ]
       },
       // ========= project ============

@@ -31,11 +31,10 @@
 <script setup>
 import { onMounted, reactive, ref } from "vue";
 import { ElTable } from "element-plus";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { Download, ZoomIn } from "@element-plus/icons-vue/global";
 import { getJointList } from "@/api/http";
 
-const jieshou = useRoute();
 const tiaozhuan = useRouter();
 //变量
 const tableData = reactive([]);
@@ -43,28 +42,30 @@ const flag = ref(true);
 //初始化方法
 onMounted(() => {
   let CUID = localStorage.getItem("/product/jointlist");
-  getJointList(CUID).then(res => {
-    if (res.code === "200") {
-      tableData.value = res.data;
-      if (tableData.value.length > 0 && !tableData.value[0].jointArm) {
-        flag.value = false;
+  if (CUID) {
+    getJointList(CUID).then(res => {
+      if (res.code === "200") {
+        tableData.value = res.data;
+        if (tableData.value.length > 0 && !tableData.value[0].jointArm) {
+          flag.value = false;
+        }
       }
-    }
-  });
+    });
+  }
 });
 
 //函数
 const lookdetail = (row) => {
   if (row.valueOf().detailID !== "") {
-    localStorage.setItem("/product/jointdetails", row.valueOf().detailID);
-    tiaozhuan.push("/product/jointdetails");
+    localStorage.setItem("/product/details", row.valueOf().detailID);
+    tiaozhuan.push("/product/details");
   } else {
     ElMessage.error("该产品没有详情页，请联系管理员添加");
   }
 };
 const lookDownload = (row) => {
-  localStorage.setItem("/product/jointdownloads", row.valueOf().detailID);
-  tiaozhuan.push("/product/jointdownloads");
+  localStorage.setItem("/product/downloads", row.valueOf().jointId);
+  tiaozhuan.push("/product/downloads");
 };
 
 

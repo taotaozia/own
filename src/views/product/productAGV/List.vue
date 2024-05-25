@@ -104,11 +104,10 @@
 <script setup>
 import { onMounted, reactive, ref } from "vue";
 import { ElTable } from "element-plus";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { getProductSelect, putProductList } from "@/api/http";
-import { Download, ZoomIn } from "@element-plus/icons-vue/global";
+import { Download, Refresh, ZoomIn } from "@element-plus/icons-vue/global";
 
-const jieshou = useRoute();
 const tiaozhuan = useRouter();
 //变量
 const loadValue = ref("");
@@ -128,18 +127,20 @@ const tableData = reactive([]);
 //初始化方法
 onMounted(() => {
   let CUID = localStorage.getItem("/product/agvlist");
-  // 列表内容
-  search();
-  // 选项内容
-  getProductSelect(CUID).then((res) => {
-    if (res.code === "200") {
-      total.value = res.data.total;
-      selectvalue(res.data.load, loadSelects);
-      selectvalue(res.data.control, controlSelects);
-      selectvalue(res.data.drive, driveSelects);
-      selectvalue(res.data.chassis, chassisSelects);
-    }
-  });
+  if (CUID) {
+    // 列表内容
+    search();
+    // 选项内容
+    getProductSelect(CUID).then((res) => {
+      if (res.code === "200") {
+        total.value = res.data.total;
+        selectvalue(res.data.load, loadSelects);
+        selectvalue(res.data.control, controlSelects);
+        selectvalue(res.data.drive, driveSelects);
+        selectvalue(res.data.chassis, chassisSelects);
+      }
+    });
+  }
 });
 
 
@@ -157,8 +158,8 @@ const proListRes = ref({
 //函数
 const lookdetail = (row) => {
   if (row.valueOf().detailID !== "") {
-    localStorage.setItem("product/agvdetails", row.valueOf().detailID);
-    tiaozhuan.push("/product/agvdetails");
+    localStorage.setItem("/product/details", row.valueOf().detailID);
+    tiaozhuan.push("/product/details");
   } else {
     ElMessage.error("该产品没有详情页，请联系管理员添加");
   }
@@ -197,8 +198,8 @@ const reset = () => {
 };
 
 const lookDownload = (row) => {
-  localStorage.setItem("product/agvdownloads", row.valueOf().productId);
-  tiaozhuan.push("/product/agvdownloads");
+  localStorage.setItem("/product/downloads", row.valueOf().productId);
+  tiaozhuan.push("/product/downloads");
 };
 </script>
 

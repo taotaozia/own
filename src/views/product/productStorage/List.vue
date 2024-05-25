@@ -7,13 +7,9 @@
       :cell-style="{ textAlign: 'center' }"
       :header-cell-style="{ 'text-align': 'center' }">
       <el-table-column type="index" width="50" />
-      <el-table-column prop="jointType" label="产品型号" />
-      <el-table-column prop="jointIPcode" label="防护等级" />
-      <el-table-column prop="jointArm" label="臂展（mm）" />
-      <el-table-column prop="jointLoad" label="臂展（kg）" />
-      <el-table-column prop="jointAxis" label="轴数" />
-      <el-table-column prop="jointIndustry" label="应用行业" />
-      <el-table-column prop="jointDirector" label="产品负责人" />
+      <el-table-column prop="storageName" label="产品名称" />
+      <el-table-column prop="storageType" label="产品型号" />
+      <el-table-column prop="storageDirector" label="产品负责人" />
       <el-table-column>
         <template v-slot="tableData">
           <el-tooltip effect="light" content="查看详情">
@@ -29,37 +25,38 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, ref } from "vue";
+import { onMounted, reactive } from "vue";
 import { ElTable } from "element-plus";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { getStorageList } from "@/api/http";
 import { Download, ZoomIn } from "@element-plus/icons-vue/global";
 
-const jieshou = useRoute();
 const tiaozhuan = useRouter();
 const tableData = reactive([]);
 
 //初始化方法
 onMounted(() => {
-  let CUID = localStorage.getItem("/product/jointlist");
-  getStorageList(CUID).then(res => {
-    if (res.code === "200") {
-      tableData.value = res.data;
-    }
-  });
+  let CUID = localStorage.getItem("/product/storagelist");
+  if (CUID){
+    getStorageList(CUID).then(res => {
+      if (res.code === "200") {
+        tableData.value = res.data;
+      }
+    });
+  }
 });
 //函数
 const lookdetail = (row) => {
   if (row.valueOf().detailID !== "") {
-    localStorage.setItem("/product/storagedetails", row.valueOf().detailID);
-    tiaozhuan.push("/product/storagedetails");
+    localStorage.setItem("/product/details", row.valueOf().detailID);
+    tiaozhuan.push("/product/details");
   } else {
     ElMessage.error("该产品没有详情页，请联系管理员添加");
   }
 };
 const lookDownload = (row) => {
-  localStorage.setItem("/product/storagedownloads", row.valueOf().detailID);
-  tiaozhuan.push("/product/storagedownloads");
+  localStorage.setItem("/product/downloads", row.valueOf().storageId);
+  tiaozhuan.push("/product/downloads");
 };
 
 

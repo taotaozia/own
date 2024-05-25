@@ -62,7 +62,10 @@ onMounted(() => {
   margin-left: 8vw;
   border-radius: 20px;
 }
-
+.backImg-active {
+  border-radius: 20px;
+  background-color: #bdbdbd;
+}
 .img {
   position: relative;
   text-align: center;

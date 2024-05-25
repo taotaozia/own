@@ -49,7 +49,7 @@
 <script setup>
 import { onMounted, reactive, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { getDetailProTypeSelect, getStorage, putUpdateProduct } from "@/api/http";
+import { getDetailProTypeSelect, getStorage, putUpdateStorage } from "@/api/http";
 
 const jieshou = useRoute();
 const tiaozhuan = useRouter();
@@ -60,7 +60,7 @@ const detailSelects = reactive([]);
 const rules = {
   categoryName: [{ required: true, message: "请选择关联产品类型", trigger: "blur" }],
   storageName: [{ required: true, message: "请输入产品名称", trigger: "blur" }],
-  storageType: [{ required: true, message: "请输入产品类型编号", trigger: "blur" }],
+  storageType: [{ required: true, message: "请输入产品类型编号", trigger: "blur" }]
 };
 
 onMounted(() => {
@@ -91,7 +91,8 @@ const onSubmit = async () => {
       if (storage.value.detailName === undefined) {
         storage.value.detailName = "";
       }
-      putUpdateProduct(JSON.stringify(storage.value.valueOf())).then((res) => {
+      console.log(JSON.stringify(storage.value.valueOf()));
+      putUpdateStorage(JSON.stringify(storage.value.valueOf())).then((res) => {
         if (res.code === "200") {
           ElMessage.success("修改成功");
           tiaozhuan.push("/edit/storage");

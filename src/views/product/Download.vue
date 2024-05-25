@@ -11,11 +11,7 @@
         <el-table-column label="文件名" prop="fileName" />
         <el-table-column label="下载" width="100px">
           <template #default="scope">
-            <el-button type="primary" round @click="download(scope.row)">
-              <el-icon>
-                <Download />
-              </el-icon>
-            </el-button>
+            <el-button :icon="Download" type="primary" round @click="download(scope.row)" />
           </template>
         </el-table-column>
       </el-table>
@@ -26,15 +22,13 @@
 <script setup>
 import { ElTable } from "element-plus";
 import { onMounted, reactive, ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import { getCategory, getDownload, getDownloadTable } from "@/api/http";
+import { getDownload, getDownloadTable } from "@/api/http";
+import { Download } from "@element-plus/icons-vue/global";
 
 let loading = ref(false);
-const jieshou = useRoute();
-const tiaozhuan = useRouter();
 let downloadData = reactive([]);
 onMounted(() => {
-  const PUID = localStorage.getItem("product/agvdownloads");
+  const PUID = localStorage.getItem("/product/downloads");
   if (PUID) {
     getDownloadTable(PUID).then((res) => {
       if (res.code === "200") {
