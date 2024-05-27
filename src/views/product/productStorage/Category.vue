@@ -22,7 +22,7 @@
 </template>
 <script setup>
 import { onMounted, reactive } from "vue";
-import { getCategoryClass } from "@/api/http";
+import { getCategorys } from "@/api/http";
 import { useRouter } from "vue-router";
 
 const tiaozhuan = useRouter();
@@ -44,7 +44,7 @@ const getlist = (CUID) => {
 let data1 = reactive([]);
 // 初始化方法
 onMounted(() => {
-  getCategoryClass("智能仓储").then(res => {
+  getCategorys("智能仓储").then(res => {
     if (res.code === "200") {
       data1.value = res.data.slice(0, 4);
     }

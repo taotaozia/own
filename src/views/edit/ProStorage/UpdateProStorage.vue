@@ -91,7 +91,6 @@ const onSubmit = async () => {
       if (storage.value.detailName === undefined) {
         storage.value.detailName = "";
       }
-      console.log(JSON.stringify(storage.value.valueOf()));
       putUpdateStorage(JSON.stringify(storage.value.valueOf())).then((res) => {
         if (res.code === "200") {
           ElMessage.success("修改成功");

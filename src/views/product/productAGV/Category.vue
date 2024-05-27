@@ -17,14 +17,14 @@
 <script setup>
 import { onMounted, reactive } from "vue";
 import CategoryImg from "@/views/Utils/CategoryImg.vue";
-import { getCategoryClass } from "@/api/http";
+import { getCategorys } from "@/api/http";
 
 
 let updata = reactive([]);
 let downdata = reactive([]);
 // 初始化方法
 onMounted(() => {
-  getCategoryClass("移动机器人").then((res) => {
+  getCategorys("移动机器人").then((res) => {
     if (res.code === "200") {
       updata.value = res.data.slice(0, 4);
       downdata.value = res.data.slice(4, 8);

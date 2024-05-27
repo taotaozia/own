@@ -74,13 +74,9 @@ export const deleteRouter = (id) => {
 
 
 // =========== 产品类别接口 ===========
-//获取所有的产品类别
-export const getCategorys = () => {
-  return request.get("/product/category");
-};
 //获取某事业部的产品类别
-export const getCategoryClass = (classify) => {
-  return request.get("/product/categoryClass?classify=" + classify);
+export const getCategorys = (classify) => {
+  return request.get("/product/categorys?classify=" + classify);
 };
 // 获取某个产品类别
 export const getCategory = (id) => {
@@ -139,8 +135,8 @@ export const deleteProduct = (id) => {
 };
 
 // 获取所有产品的类型编号
-export const getProTypeSelect = () => {
-  return request.get("/product/getprotypeselects");
+export const getProTypeSelect = (classify) => {
+  return request.get("/product/getprotypeselects?classify=" + classify);
 };
 
 // 获取产品关联选项 -- 详情页 + 产品类型
@@ -196,8 +192,8 @@ export const getDetailTable = (DUID) => {
 };
 
 // 获取所有详情页
-export const getDetails = () => {
-  return request.get("/product/getdetails");
+export const getDetails = (classify) => {
+  return request.get("/product/getdetails?classify=" + classify);
 };
 
 // 获取某个详情页
@@ -227,15 +223,15 @@ export const getDownloadTable = (PUID) => {
 };
 
 // 获取所有下载内容
-export const getDownloads = () => {
-  return request.get("/product/getdownloads");
+export const getDownloads = (classify) => {
+  return request.get("/product/getdownloads?classify=" + classify);
 };
 // 选择某个下载内容
 export const getDownloadSQL = (id) => {
   return request.get("/product/getdownload?id=" + id);
 };
-export const getDownloadSelect = () => {
-  return request.get("/product/getprotypeselects");
+export const getDownloadSelect = (classify) => {
+  return request.get("/product/getprotypeselects?classify=" + classify);
 };
 
 // 添加下载内容

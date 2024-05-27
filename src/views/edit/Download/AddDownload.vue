@@ -29,6 +29,13 @@
               :value="item.value" />
           </el-select>
         </el-form-item>
+        <el-form-item label="类型" prop="classify">
+          <el-select v-model="download.classify" style="width: 250px">
+            <el-option label="移动机器人" value="移动机器人" />
+            <el-option label="智能仓储" value="智能仓储" />
+            <el-option label="关节机器人" value="关节机器人" />
+          </el-select>
+        </el-form-item>
         <el-form-item label="文件名">
           <el-input disabled v-model="download.fileName" style="width: 600px" />
         </el-form-item>
@@ -73,18 +80,18 @@
 
 <script setup>
 import { onMounted, reactive, ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import dayjs from "dayjs";
 import { getDownloads, getProTypeSelect, postAddDownload, postUploadOne } from "@/api/http";
-import { ElTable } from "element-plus";
+import { ElLoading, ElTable } from "element-plus";
 
-const jieshou = useRoute();
 const tiaozhuan = useRouter();
 
 let download = ref({
   id: 0,
   downloadID: "",
   productID: "",
+  classify: "",
   productName: "",
   downloadName: "",
   fileName: "",
@@ -102,12 +109,12 @@ const rules = {
 const productSelects = reactive([]);
 const TableData = reactive([]);
 onMounted(() => {
-  getProTypeSelect().then((res) => {
+  getProTypeSelect("null").then((res) => {
     if (res.code === "200") {
       selectvalue(res.data, productSelects);
     }
   });
-  getDownloads().then((res) => {
+  getDownloads("null").then((res) => {
     if (res.code === "200") {
       TableData.value = res.data;
     }
@@ -136,6 +143,7 @@ const handleCopyFile = (row) => {
 
 // 上传文件的功能
 let file = reactive({});
+let haveFile = ref(false);
 const handleExceed = () => {
   ElMessage.warning("只能上传一个文件，请删除后选择重新选择！");
 };
@@ -150,6 +158,7 @@ const beforUPload = (file) => {
 // 自定义上传方法定义
 const uploadFile = (val) => {
   file = val.file;
+  haveFile.value = true;
 };
 
 const add = () => {
@@ -164,9 +173,15 @@ const add = () => {
 };
 // 提交
 const onSubmit = async () => {
+  ElMessage.warning("上传中，请勿操作");
   await form.value.validate(async (vaild) => {
     if (vaild) {
-      if (file.value) {
+      const loading = ElLoading.service({
+        lock: true,
+        text: "上传中...",
+        background: "rgba(0, 0, 0, 0.7)"
+      });
+      if (haveFile.value) {
         let formData = new FormData();
         formData.append("downloadType", download.value.downloadType);
         formData.append("file", file);
@@ -179,12 +194,15 @@ const onSubmit = async () => {
           } else {
             ElMessage.error("系统错误：" + fileRes.msg);
           }
+          loading.close();
         });
       } else {
         add();
+        loading.close();
       }
     }
   });
+
 };
 
 </script>

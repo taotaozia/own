@@ -52,6 +52,7 @@ onMounted(() => {
 const loadData = () => {
   getJoints().then((res) => {
     if (res.code === "200") {
+      console.log(res.data);
       TableData.value = res.data;
     }
   });

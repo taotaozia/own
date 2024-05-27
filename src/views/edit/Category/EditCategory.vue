@@ -42,7 +42,7 @@ onMounted(() => {
   loadData();
 });
 const loadData = () => {
-  getCategorys().then((res) => {
+  getCategorys("null").then((res) => {
     if (res.code === "200") {
       TableData.value = res.data;
     }

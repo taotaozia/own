@@ -106,7 +106,6 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import request from "@/api/request";
 import { getDetail, postUploadMul, putUpdateDetail } from "@/api/http";
 
 const jieshou = useRoute();
@@ -160,15 +159,15 @@ const rightUploadFile = (val) => {
 const onSubmit = () => {
   let formData = new FormData();
   let flag = ref(false);
-  if (leftFile.value) {
+  if (leftFile.value !== null) {
     formData.append("left", leftFile);
     flag.value = true;
   }
-  if (mainFile.value) {
+  if (mainFile.value !== null) {
     formData.append("main", mainFile);
     flag.value = true;
   }
-  if (rightFile.value) {
+  if (rightFile.value !== null) {
     formData.append("right", rightFile);
     flag.value = true;
   }

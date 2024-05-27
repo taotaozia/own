@@ -43,7 +43,7 @@ onMounted(() => {
   loadData();
 });
 const loadData = () => {
-  getDetails().then((res) => {
+  getDetails("null").then((res) => {
     if (res.code === "200") {
       TableData.value = res.data;
     }
