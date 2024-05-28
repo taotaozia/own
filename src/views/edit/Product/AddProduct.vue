@@ -76,7 +76,6 @@
 <script setup>
 import { onMounted, reactive, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import request from "@/api/request";
 import dayjs from "dayjs";
 import { getDetailProTypeSelect, postAddProduct } from "@/api/http";
 

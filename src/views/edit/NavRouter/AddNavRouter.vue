@@ -5,14 +5,19 @@
     </template>
     <div class="table">
       <el-form :model="navrouter" label-width="auto" style="max-width: 600px">
-        <el-form-item label="条件1">
-          <el-input v-model="navrouter.require1" placeholder="管理员的权限，如：一级管理员" />
+        <el-form-item label="父级ID">
+          <el-input v-model="navrouter.parentID" placeholder="上级路由ID" disabled />
         </el-form-item>
-        <el-form-item label="条件2">
-          <el-input v-model="navrouter.parentID" placeholder="上级路由ID" />
+        <el-form-item label="父级名称">
+          <el-select v-model="navrouter.parentName" @change="changeID">
+            <el-option v-for="item in routers.value" :label="item.routerTitle" :value="item" />
+          </el-select>
         </el-form-item>
-        <el-form-item label="条件3">
-          <el-input v-model="navrouter.parentName" placeholder="上级路由名称" />
+        <el-form-item label="导航描述">
+          <el-input v-model="navrouter.routerTitle" placeholder="左侧显示的名称" />
+        </el-form-item>
+        <el-form-item label="导航图标">
+          <el-input v-model="navrouter.routerIcon" placeholder="assets下的图片，直接写图片名称 带后缀.png" />
         </el-form-item>
         <el-form-item label="导航窗口是否显示">
           <el-radio-group v-model="navrouter.routerMenuFlag">
@@ -22,12 +27,6 @@
         </el-form-item>
         <el-form-item label="导航窗格跳转路由">
           <el-input v-model="navrouter.routerMenuIndex" placeholder="/edit/。。。" />
-        </el-form-item>
-        <el-form-item label="导航描述">
-          <el-input v-model="navrouter.routerTitle" placeholder="左侧显示的名称" />
-        </el-form-item>
-        <el-form-item label="导航图标">
-          <el-input v-model="navrouter.routerIcon" placeholder="图片地址，暂时没有用到" />
         </el-form-item>
         <el-form-item label="路由所属路由">
           <el-input v-model="navrouter.routerParent" placeholder="index在哪个的children下" />
@@ -53,10 +52,10 @@
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import dayjs from "dayjs";
-import { postAddCategory, postAddRouter, postUploadPng } from "@/api/http";
+import { getRouterList, postAddRouter } from "@/api/http";
 
 const jieshou = useRoute();
 const tiaozhuan = useRouter();
@@ -64,7 +63,7 @@ let navrouter = ref({
   id: 0,
   uuid: "",
   require1: "",
-  parentID: "",
+  parentID: 0,
   parentName: "",
   routerMenuFlag: "",
   routerMenuIndex: "",
@@ -78,7 +77,20 @@ let navrouter = ref({
   updatetime: dayjs(new Date()).format("YYYY-MM-DD")
 });
 
+const routers = reactive([]);
+onMounted(() => {
+  getRouterList().then(res => {
+    if (res.code === "200") {
+      routers.value = res.data;
+    }
+  });
+});
+const changeID = (row) => {
+  navrouter.value.parentID = row.id;
+  navrouter.value.parentName = row.routerTitle;
+};
 const onSubmit = async () => {
+  console.log(JSON.stringify(navrouter.value.valueOf()));
   postAddRouter(JSON.stringify(navrouter.value.valueOf())).then((res) => {
     if (res.code === "200") {
       ElMessage.success("更新成功");

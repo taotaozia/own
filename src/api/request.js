@@ -1,7 +1,8 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const serverUrl = "http://192.168.3.237:8989/api";
+// const serverUrl = "http://192.168.3.237:8989/api";
+const serverUrl = "http://localhost:8989/api";
 const request = axios.create({
   baseURL: serverUrl, timeout: 50000
 });

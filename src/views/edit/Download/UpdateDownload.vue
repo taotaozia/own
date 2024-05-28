@@ -74,11 +74,10 @@
 </template>
 
 <script setup>
-import { nextTick, onMounted, reactive, ref } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { getDownloads, getDownloadSelect, getDownloadSQL, postUploadOne, putUpdateDownload } from "@/api/http";
 import { ElLoading, ElTable } from "element-plus";
-import { options } from "axios";
 
 const tiaozhuan = useRouter();
 

@@ -22,12 +22,13 @@ onMounted(() => {
       });
     }
   }
-  if (store.state.router.routers.length < 1) {
+  if (store.state.router.routers.length < 1 || store.state.router.menus.length < 1) {
     const adminID = Cookies.get("adminID") ? Cookies.get("adminID") : "";
     if (adminID) {
-      getRouters(adminID).then(res => {
+      getRouters("null").then(res => {
         if (res.code === "200") {
-          store.commit("setRouters", res.data);
+          store.commit("setRouters", res.data.routes);
+          store.commit("setRouters", res.data.menus);
           console.log("数据丢失，重新请求");
         }
       });

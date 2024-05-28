@@ -59,17 +59,33 @@ export const getRouters = (adminID) => {
 export const getRouter = (id) => {
   return request.get("/system/getrouter?id=" + id);
 };
-// 编辑页面 -- 更新路由信息
+
 export const putUpdateRouter = (navrouter) => {
   return request.put("/system/updaterouter", navrouter);
 };
-// 编辑页面 -- 更新路由信息
+
 export const postAddRouter = (navrouter) => {
   return request.post("/system/addrouter", navrouter);
 };
-// 编辑页面 -- 更新路由信息
+
 export const deleteRouter = (id) => {
   return request.delete("/system/deleterouter?id=" + id);
+};
+
+export const getRoles = () => {
+  return request.get("/system/getroles");
+};
+export const getRole = (id) => {
+  return request.get("/system/getrole?id=" + id);
+};
+export const putUpdateRole = (role) => {
+  return request.put("/system/updaterole", role);
+};
+export const postAddRole = (role) => {
+  return request.post("/system/addrole", role);
+};
+export const deleteRole = (id) => {
+  return request.delete("/system/deleterole?id=" + id);
 };
 
 

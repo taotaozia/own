@@ -26,8 +26,8 @@
           <el-table-column prop="updatetime" width="200px" />
         </el-table>
       </div>
-      <el-dialog v-model="noticeVisible" center>
-        <p v-html="notice"></p>
+      <el-dialog v-model="noticeVisible" :title="title" center>
+        <Editor v-model="notice" aria-readonly="true" />
         <template #footer>
           <div class="dialog-footer" style="margin-top: 30px">
             <el-button type="primary" @click="noticeVisible = false">已阅</el-button>
@@ -44,11 +44,13 @@ import axios from "axios";
 import { getNotices } from "@/api/http";
 import { useStore } from "vuex";
 import Calendar from "@/views/Utils/Calendar.vue";
+import { Editor } from "@wangeditor/editor-for-vue";
 
 const store = useStore();
 const CN = ref();
 const EN = ref();
 const notice = ref();
+const title = ref();
 let noticeVisible = ref(false);
 const noticeData = reactive([]);
 const arr = ref([
@@ -75,8 +77,9 @@ onMounted(() => {
 });
 
 const openNotice = (row) => {
-  noticeVisible.value = true;
   notice.value = row.noticeText;
+  title.value = row.title;
+  noticeVisible.value = true;
 };
 
 

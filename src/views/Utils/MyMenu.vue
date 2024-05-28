@@ -37,20 +37,17 @@
       </el-menu-item-group>
     </el-sub-menu>
     <!-- 动态路由 -->
-    <el-sub-menu index="/edit">
-      <template #title>
-        <img src="../../assets/iconedit.png" height="20" width="20" style="margin-right: 10px" />
-        <span>编辑</span>
-      </template>
-      <el-menu-item-group>
-        <el-menu-item index="/userData">个人资料</el-menu-item>
-        <i v-for="(router,index) in routerData" :key="index">
-          <i v-if="router.routerMenuFlag === '是'">
-            <el-menu-item :index="router.routerMenuIndex"><span>{{ router.routerTitle }}</span></el-menu-item>
-          </i>
-        </i>
-      </el-menu-item-group>
-    </el-sub-menu>
+    <div v-for="menu in menusData">
+      <el-sub-menu :index="menu.index">
+        <template #title>
+          <img :src="readIcon(menu.icon)" height="20" width="20" style="margin-right: 10px" />
+          <span>{{ menu.label }}</span>
+        </template>
+        <el-menu-item-group v-for="item in menu.children">
+          <el-menu-item :index="item.index"><span>{{ item.label }}</span></el-menu-item>
+        </el-menu-item-group>
+      </el-sub-menu>
+    </div>
 
   </el-menu>
 </template>
@@ -60,10 +57,12 @@ import { onMounted, ref } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
-const routerData = ref({});
+const menusData = ref({});
 onMounted(() => {
-  routerData.value = store.state.router.routers;
-  console.log("添加导航完成")
+  menusData.value = store.state.router.menus;
+  console.log("添加导航完成");
 });
-
+const readIcon = (icon) => {
+  return require("@/assets/" + icon);
+};
 </script>

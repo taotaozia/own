@@ -85,9 +85,13 @@ const login = async () => {
         if (res.code === "200") {
           Cookies.set("adminID", res.data.uuid);
           store.commit("setUser", res.data);
-          getRouters(res.data.uuid).then(ret => {
+          getRouters("null").then(ret => {
             if (res.code === "200") {
-              store.commit("setRouters", ret.data);
+              console.log(ret.data);
+              store.commit("setRouters", ret.data.routes);
+              store.commit("setMenus", ret.data.menus);
+              console.log("路由" + store.state.router.routers);
+              console.log("导航" + store.state.router.menus);
               tiaozhuan.push("/home");
               loginuser.account = "";
               loginuser.password = "";
@@ -95,6 +99,7 @@ const login = async () => {
             }
           });
         } else if (res.code === "403") {
+          loginuser.password = "";
           ElMessage.error("账号或密码错误");
         } else {
           ElMessage.error("系统错误");

@@ -11,7 +11,7 @@ export default {
       state.routers = routers;
     },
     setMenus(state, menus) {
-      state.routers = menus;
+      state.menus = menus;
     }
   }
 };
