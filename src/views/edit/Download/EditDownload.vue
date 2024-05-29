@@ -10,8 +10,8 @@
         <el-table-column prop="productName" label="关联产品" width="120" />
         <el-table-column prop="downloadType" label="文件类型" width="120" />
         <el-table-column prop="downloadName" label="名称" width="200" />
-        <el-table-column prop="fileName" label="文件名" width="400" />
-        <el-table-column prop="downloadUrl" label="读取地址" width="400" />
+        <el-table-column prop="fileName" label="文件名" width="300" />
+<!--        <el-table-column prop="downloadUrl" label="读取地址" width="500" />-->
         <el-table-column prop="updatetime" label="更新时间" width="200" />
         <el-table-column fixed="right" width="150">
           <template #header>
@@ -35,14 +35,16 @@ import { markRaw, onMounted, reactive } from "vue";
 import { Delete } from "@element-plus/icons-vue";
 import { useRouter } from "vue-router";
 import { deleteDownload, getDownloads } from "@/api/http";
+import { useStore } from "vuex";
 
 const tiaozhuan = useRouter();
 const TableData = reactive([]);
+const store = useStore();
 onMounted(() => {
   loadData();
 });
 const loadData = () => {
-  getDownloads("null").then((res) => {
+  getDownloads(store.state.user.admin.classify).then((res) => {
     if (res.code === "200") {
       TableData.value = res.data;
     }

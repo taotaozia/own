@@ -11,12 +11,17 @@
         <el-form-item label="姓名">
           <el-input v-model="admin.name" disabled />
         </el-form-item>
-        <el-form-item label="身份">
-          <el-select v-model="admin.identity">
-            <el-option label="一级管理员" value="一级管理员" />
-            <el-option label="二级管理员" value="二级管理员" />
-            <el-option label="普通用户" value="普通用户" />
+        <el-form-item label="身份" prop="identity">
+          <el-select clearable v-model="admin.identity">
+            <el-option
+              v-for="item in roles"
+              :key="item.id"
+              :label="item.roleName"
+              :value="item.roleName" />
           </el-select>
+        </el-form-item>
+        <el-form-item label="标识" prop="classify">
+          <el-input v-model="admin.classify" />
         </el-form-item>
         <el-form-item label="研究院">
           <el-select v-model="admin.faculty">
@@ -47,24 +52,25 @@
 
 <script setup>
 import { onMounted, ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import { getAdmin, putUpdateAdmin } from "@/api/http";
+import { useRouter } from "vue-router";
+import { getAdmin, getRoles, putUpdateAdmin } from "@/api/http";
 
-const jieshou = useRoute();
+
 const tiaozhuan = useRouter();
-
+const roles = ref([]);
 let admin = ref({});
 onMounted(() => {
   const id = localStorage.getItem("/edit/updateUser");
-  if (id) {
-    getAdmin(id).then((res) => {
-      if (res.code === "200") {
-        admin.value = res.data;
-      }
-    });
-  } else {
-    tiaozhuan.push("/edit/user");
-  }
+  getAdmin(id).then((res) => {
+    if (res.code === "200") {
+      admin.value = res.data;
+    }
+  });
+  getRoles().then(res => {
+    if (res.code === "200") {
+      roles.value = res.data;
+    }
+  });
 });
 const onSubmit = () => {
   admin.value.token = "";

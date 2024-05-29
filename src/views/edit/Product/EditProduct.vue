@@ -13,10 +13,10 @@
         <el-table-column prop="productBOM" label="物料编号" width="150" />
         <el-table-column prop="productDirector" label="负责人" width="100" />
 
-        <el-table-column prop="productType" label="类型编号" width="120" />
+        <el-table-column prop="productType" label="类型编号" width="200" />
         <el-table-column prop="productLoad" label="载重" width="60" />
         <el-table-column prop="productModel" label="车型" width="100" />
-        <el-table-column prop="productControl" label="控制器" width="80" />
+        <el-table-column prop="productControl" label="控制器" width="120" />
         <el-table-column prop="productDrive" label="导航方式" width="150" />
         <el-table-column prop="productChassis" label="底盘" width="100" />
 

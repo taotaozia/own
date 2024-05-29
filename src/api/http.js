@@ -75,6 +75,9 @@ export const deleteRouter = (id) => {
 export const getRoles = () => {
   return request.get("/system/getroles");
 };
+export const getRoleTree = () => {
+  return request.get("/system/getroletree");
+};
 export const getRole = (id) => {
   return request.get("/system/getrole?id=" + id);
 };

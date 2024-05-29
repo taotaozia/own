@@ -7,10 +7,10 @@
       <el-table :data="TableData.value" style="width: 100%;height: 500px">
         <el-table-column type="index" label="序号" width="60" />
         <el-table-column prop="classify" label="产品所属" width="100" />
-        <el-table-column prop="categoryName" label="类型名称" width="100" />
-        <el-table-column prop="picture" label="图片" width="150" />
+        <el-table-column prop="categoryName" label="类型名称" width="150" />
+        <el-table-column prop="picture" label="图片" width="200" />
         <el-table-column prop="categoryDescription" label="描述" />
-        <el-table-column prop="pictureUrl" label="展示图片" />
+<!--        <el-table-column prop="pictureUrl" label="展示图片" />-->
         <el-table-column prop="updatetime" label="更新时间" width="200" />
         <el-table-column width="150">
           <template #header>
@@ -35,14 +35,16 @@ import { markRaw, onMounted, reactive } from "vue";
 import { Delete } from "@element-plus/icons-vue";
 import { useRouter } from "vue-router";
 import { deleteCategory, getCategorys } from "@/api/http";
+import { useStore } from "vuex";
 
 const tiaozhuan = useRouter();
 const TableData = reactive([]);
+const store = useStore();
 onMounted(() => {
   loadData();
 });
 const loadData = () => {
-  getCategorys("null").then((res) => {
+  getCategorys(store.state.user.admin.classify).then((res) => {
     if (res.code === "200") {
       TableData.value = res.data;
     }

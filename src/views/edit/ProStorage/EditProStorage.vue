@@ -6,13 +6,13 @@
     <div>
       <el-table :data="TableData.value" style="width: 100%;height: 500px">
         <el-table-column fixed="left" type="index" label="序号" width="60" />
-        <el-table-column prop="categoryName" label="关联产品" width="200" />
+        <el-table-column prop="categoryName" label="关联产品" width="100" />
         <el-table-column prop="detailName" label="关联详情页" width="200" />
         <el-table-column prop="storageName" label="产品名称" width="150" />
         <el-table-column prop="updatetime" label="更新时间" width="200" />
         <el-table-column prop="storageBOM" label="物料编号" width="150" />
         <el-table-column prop="storageDirector" label="负责人" width="100" />
-        <el-table-column prop="storageType" label="产品编号" />
+        <el-table-column prop="storageType" label="产品编号" width="150"/>
 
         <el-table-column fixed="right" width="150">
           <template #header>

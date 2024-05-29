@@ -85,13 +85,10 @@ const login = async () => {
         if (res.code === "200") {
           Cookies.set("adminID", res.data.uuid);
           store.commit("setUser", res.data);
-          getRouters("null").then(ret => {
+          getRouters(store.state.user.admin.uuid).then(ret => {
             if (res.code === "200") {
-              console.log(ret.data);
               store.commit("setRouters", ret.data.routes);
               store.commit("setMenus", ret.data.menus);
-              console.log("路由" + store.state.router.routers);
-              console.log("导航" + store.state.router.menus);
               tiaozhuan.push("/home");
               loginuser.account = "";
               loginuser.password = "";

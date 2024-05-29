@@ -36,14 +36,16 @@ import { markRaw, onMounted, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { Delete } from "@element-plus/icons-vue";
 import { deleteDetail, getDetails } from "@/api/http";
+import { useStore } from "vuex";
 
 const tiaozhuan = useRouter();
 const TableData = reactive([]);
+const store = useStore();
 onMounted(() => {
   loadData();
 });
 const loadData = () => {
-  getDetails("null").then((res) => {
+  getDetails(store.state.user.admin.classify).then((res) => {
     if (res.code === "200") {
       TableData.value = res.data;
     }

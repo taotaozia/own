@@ -25,7 +25,7 @@ onMounted(() => {
   if (store.state.router.routers.length < 1 || store.state.router.menus.length < 1) {
     const adminID = Cookies.get("adminID") ? Cookies.get("adminID") : "";
     if (adminID) {
-      getRouters("null").then(res => {
+      getRouters(store.state.user.admin.uuid).then(res => {
         if (res.code === "200") {
           store.commit("setRouters", res.data.routes);
           store.commit("setRouters", res.data.menus);

@@ -84,6 +84,7 @@ import { useRouter } from "vue-router";
 import dayjs from "dayjs";
 import { getDownloads, getProTypeSelect, postAddDownload, postUploadOne } from "@/api/http";
 import { ElLoading, ElTable } from "element-plus";
+import { useStore } from "vuex";
 
 const tiaozhuan = useRouter();
 
@@ -108,13 +109,14 @@ const rules = {
 };
 const productSelects = reactive([]);
 const TableData = reactive([]);
+const store = useStore();
 onMounted(() => {
-  getProTypeSelect("null").then((res) => {
+  getProTypeSelect(store.state.user.admin.classify).then((res) => {
     if (res.code === "200") {
       selectvalue(res.data, productSelects);
     }
   });
-  getDownloads("null").then((res) => {
+  getDownloads(store.state.user.admin.classify).then((res) => {
     if (res.code === "200") {
       TableData.value = res.data;
     }

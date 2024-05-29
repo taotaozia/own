@@ -5,16 +5,17 @@
     </template>
     <div class="table">
       <el-table :data="TableData.value" style="width: 100%;height: 500px">
-        <el-table-column type="index" label="序号" width="60" />
+        <el-table-column fixed="left" type="index" label="序号" width="60" />
         <!--      <el-table-column prop="uuid" label="uudi" width="180" />-->
-        <el-table-column prop="adminID" label="工号" />
-        <el-table-column prop="name" label="姓名" />
-        <el-table-column prop="identity" label="身份" />
-        <el-table-column prop="faculty" label="一级部门" />
-        <el-table-column prop="department" label="二级部门" />
-        <el-table-column prop="post" label="岗位身份" />
+        <el-table-column prop="adminID" label="工号" width="130"/>
+        <el-table-column prop="name" label="姓名" width="130"/>
+        <el-table-column prop="identity" label="身份" width="120"/>
+        <el-table-column prop="classify" label="标识" width="100"/>
+        <el-table-column prop="faculty" label="一级部门" width="150"/>
+        <el-table-column prop="department" label="二级部门" width="150"/>
+        <el-table-column prop="post" label="岗位身份" width="150"/>
         <el-table-column prop="updatetime" label="更新时间" width="200" />
-        <el-table-column width="150">
+        <el-table-column fixed="right" width="150">
           <template #header>
             <el-button type="warning" icon="Plus" size="small" @click="tiaozhuan.push('/edit/addUser')">
               添加

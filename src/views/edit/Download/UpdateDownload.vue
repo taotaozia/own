@@ -78,12 +78,14 @@ import { onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { getDownloads, getDownloadSelect, getDownloadSQL, postUploadOne, putUpdateDownload } from "@/api/http";
 import { ElLoading, ElTable } from "element-plus";
+import { useStore } from "vuex";
 
 const tiaozhuan = useRouter();
 
 let download = ref({});
 const productSelects = reactive([]);
 const TableData = reactive([]);
+const store = useStore();
 onMounted(() => {
   const id = localStorage.getItem("/edit/updateDownload");
   if (id) {
@@ -92,12 +94,12 @@ onMounted(() => {
         download.value = res.data;
       }
     });
-    getDownloadSelect("null").then((res) => {
+    getDownloadSelect(store.state.user.admin.classify).then((res) => {
       if (res.code === "200") {
         selectvalue(res.data, productSelects);
       }
     });
-    getDownloads().then((res) => {
+    getDownloads(store.state.user.admin.classify).then((res) => {
       if (res.code === "200") {
         TableData.value = res.data;
       }
